@@ -1,13 +1,13 @@
 import { inRange, merge } from "lodash-es";
 
-import Assessment from "yoastseo/src/assessment";
+import Assessment from "../../assesment";
 import { createAnchorOpeningTag } from "yoastseo/src/helpers/shortlinker";
 import AssessmentResult from "yoastseo/src/values/AssessmentResult";
 
 /**
  * Assessment that will test if the text is long enough.
  */
-export default class TextLengthAssessment extends Assessment {
+export default class CharLengthAssessment extends Assessment {
     /**
      * Sets the identifier and the config.
      *
@@ -51,8 +51,7 @@ export default class TextLengthAssessment extends Assessment {
      * @returns {AssessmentResult} The result of the assessment, containing both a score and a descriptive text.
      */
     getResult( paper, researcher, i18n ) {
-        const charCount = researcher.getResearch( "charCountInText" );
-        console.log(charCount);
+        const charCount = researcher.getResearch( "charCount" );
         const assessmentResult = new AssessmentResult();
         const calculatedResult = this.calculateResult( charCount, i18n );
 

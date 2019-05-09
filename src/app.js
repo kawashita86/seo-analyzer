@@ -29,6 +29,7 @@ import {sprintf} from "./helpers/sprintf";
 
 import removeHtmlBlocks from "yoastseo/src/stringProcessing/htmlParser.js";
 import charCountIntText from "./researches/charCountIntText";
+import {ResearcherCustom} from "./researcher";
 
 const keyphraseDistribution = new KeyphraseDistributionAssessment();
 
@@ -57,6 +58,7 @@ var defaults = {
         text: "Start writing your text!",
     },
     queue: [ "wordCount",
+        "charCount",
         "keywordDensity",
         "subHeadings",
         "stopwords",
@@ -694,9 +696,10 @@ App.prototype.runAnalyzer = function() {
 
     // The new researcher
     if ( isUndefined( this.researcher ) ) {
-        this.researcher = new Researcher( this.paper );
+        this.researcher = new ResearcherCustom( this.paper );
         this.researcher.addResearch("charCount", charCountIntText);
     } else {
+        this.researcher.addResearch("charCount", charCountIntText);
         this.researcher.setPaper( this.paper );
     }
 

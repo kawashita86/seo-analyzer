@@ -192,3 +192,6 @@ dist/
 .idea/modules.xml
 .idea/vcs.xml
 .idea/yoastseo.iml
+
+.idea
+yarn.lock

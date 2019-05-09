@@ -2,15 +2,9 @@ import Researcher from "yoastseo/src/researcher.js";
 import MissingArgument from "yoastseo/src/errors/missingArgument";
 import removeDuplicateMarks from "yoastseo/src/markers/removeDuplicateMarks";
 import AssessmentResult from "yoastseo/src/values/AssessmentResult.js";
-import { showTrace } from "yoastseo/src/helpers/errors.js";
-
-import { isUndefined } from "lodash-es";
-import { isFunction } from "lodash-es";
-import { forEach } from "lodash-es";
-import { filter } from "lodash-es";
-import { map } from "lodash-es";
-import { findIndex } from "lodash-es";
-import { find } from "lodash-es";
+import {showTrace} from "yoastseo/src/helpers/errors.js";
+import {isUndefined, isFunction, forEach, filter, map, findIndex, find} from "lodash-es";
+import {ResearcherCustom} from "./researcher";
 
 var ScoreRating = 9;
 
@@ -24,16 +18,16 @@ var ScoreRating = 9;
  *
  * @constructor
  */
-var Assessor = function( i18n, options ) {
-    this.type = "Assessor";
-    this.setI18n( i18n );
-    this._assessments = [];
+var Assessor = function (i18n, options) {
+  this.type = "Assessor";
+  this.setI18n(i18n);
+  this._assessments = [];
 
-    this._options = options || {};
+  this._options = options || {};
 
-    if ( ! isUndefined( this._options.researcher ) ) {
-        this._researcher = this._options.researcher;
-    }
+  if (!isUndefined(this._options.researcher)) {
+    this._researcher = this._options.researcher;
+  }
 };
 
 /**
@@ -43,19 +37,19 @@ var Assessor = function( i18n, options ) {
  * @throws {MissingArgument} Parameter needs to be a valid i18n object.
  * @returns {void}
  */
-Assessor.prototype.setI18n = function( i18n ) {
-    if ( isUndefined( i18n ) ) {
-        throw new MissingArgument( "The assessor requires an i18n object." );
-    }
-    this.i18n = i18n;
+Assessor.prototype.setI18n = function (i18n) {
+  if (isUndefined(i18n)) {
+    throw new MissingArgument("The assessor requires an i18n object.");
+  }
+  this.i18n = i18n;
 };
 
 /**
  * Gets all available assessments.
  * @returns {object} assessment
  */
-Assessor.prototype.getAvailableAssessments = function() {
-    return this._assessments;
+Assessor.prototype.getAvailableAssessments = function () {
+  return this._assessments;
 };
 
 /**
@@ -66,12 +60,12 @@ Assessor.prototype.getAvailableAssessments = function() {
  * @param {Researcher} [researcher] The Researcher object containing additional information.
  * @returns {boolean} Whether or not the Assessment is applicable.
  */
-Assessor.prototype.isApplicable = function( assessment, paper, researcher ) {
-    if ( assessment.hasOwnProperty( "isApplicable" ) || typeof assessment.isApplicable === "function" ) {
-        return assessment.isApplicable( paper, researcher );
-    }
+Assessor.prototype.isApplicable = function (assessment, paper, researcher) {
+  if (assessment.hasOwnProperty("isApplicable") || typeof assessment.isApplicable === "function") {
+    return assessment.isApplicable(paper, researcher);
+  }
 
-    return true;
+  return true;
 };
 
 /**
@@ -80,8 +74,8 @@ Assessor.prototype.isApplicable = function( assessment, paper, researcher ) {
  * @param {Object} assessment The assessment to check for.
  * @returns {boolean} Whether or not the assessment has a marker.
  */
-Assessor.prototype.hasMarker = function( assessment ) {
-    return isFunction( this._options.marker ) && ( assessment.hasOwnProperty( "getMarks" ) || typeof assessment.getMarks === "function" );
+Assessor.prototype.hasMarker = function (assessment) {
+  return isFunction(this._options.marker) && (assessment.hasOwnProperty("getMarks") || typeof assessment.getMarks === "function");
 };
 
 /**
@@ -89,8 +83,8 @@ Assessor.prototype.hasMarker = function( assessment ) {
  *
  * @returns {Function} The specific marker for this assessor.
  */
-Assessor.prototype.getSpecificMarker = function() {
-    return this._options.marker;
+Assessor.prototype.getSpecificMarker = function () {
+  return this._options.marker;
 };
 
 /**
@@ -98,8 +92,8 @@ Assessor.prototype.getSpecificMarker = function() {
  *
  * @returns {Paper} The paper that was most recently assessed.
  */
-Assessor.prototype.getPaper = function() {
-    return this._lastPaper;
+Assessor.prototype.getPaper = function () {
+  return this._lastPaper;
 };
 
 /**
@@ -110,15 +104,15 @@ Assessor.prototype.getPaper = function() {
  * @param {Researcher} researcher The researcher for the paper.
  * @returns {Function} A function that can mark the given paper according to the given assessment.
  */
-Assessor.prototype.getMarker = function( assessment, paper, researcher ) {
-    var specificMarker = this._options.marker;
+Assessor.prototype.getMarker = function (assessment, paper, researcher) {
+  var specificMarker = this._options.marker;
 
-    return function() {
-        let marks = assessment.getMarks( paper, researcher );
-        marks = removeDuplicateMarks( marks );
+  return function () {
+    let marks = assessment.getMarks(paper, researcher);
+    marks = removeDuplicateMarks(marks);
 
-        specificMarker( paper, marks );
-    };
+    specificMarker(paper, marks);
+  };
 };
 
 /**
@@ -127,24 +121,24 @@ Assessor.prototype.getMarker = function( assessment, paper, researcher ) {
  * @param {Paper} paper The paper to run assessments on.
  * @returns {void}
  */
-Assessor.prototype.assess = function( paper ) {
-    if ( isUndefined( this._researcher ) ) {
-        this._researcher = new Researcher( paper );
-    } else {
-        this._researcher.setPaper( paper );
-    }
+Assessor.prototype.assess = function (paper) {
+  if (isUndefined(this._researcher)) {
+    this._researcher = new ResearcherCustom(paper);
+  } else {
+    this._researcher.setPaper(paper);
+  }
 
-    var assessments = this.getAvailableAssessments();
-    this.results = [];
+  var assessments = this.getAvailableAssessments();
+  this.results = [];
 
-    assessments = filter( assessments, function( assessment ) {
-        return this.isApplicable( assessment, paper, this._researcher );
-    }.bind( this ) );
+  assessments = filter(assessments, function (assessment) {
+    return this.isApplicable(assessment, paper, this._researcher);
+  }.bind(this));
 
-    this.setHasMarkers( false );
-    this.results = map( assessments, this.executeAssessment.bind( this, paper, this._researcher ) );
+  this.setHasMarkers(false);
+  this.results = map(assessments, this.executeAssessment.bind(this, paper, this._researcher));
 
-    this._lastPaper = paper;
+  this._lastPaper = paper;
 };
 
 /**
@@ -153,8 +147,8 @@ Assessor.prototype.assess = function( paper ) {
  * @param {boolean} hasMarkers True when there are markers, otherwise it is false.
  * @returns {void}
  */
-Assessor.prototype.setHasMarkers = function( hasMarkers ) {
-    this._hasMarkers = hasMarkers;
+Assessor.prototype.setHasMarkers = function (hasMarkers) {
+  this._hasMarkers = hasMarkers;
 };
 
 /**
@@ -162,8 +156,8 @@ Assessor.prototype.setHasMarkers = function( hasMarkers ) {
  *
  * @returns {boolean} Are there markers
  */
-Assessor.prototype.hasMarkers = function() {
-    return this._hasMarkers;
+Assessor.prototype.hasMarkers = function () {
+  return this._hasMarkers;
 };
 
 /**
@@ -174,38 +168,38 @@ Assessor.prototype.hasMarkers = function() {
  * @param {Object} assessment The assessment to execute.
  * @returns {AssessmentResult} The result of the assessment.
  */
-Assessor.prototype.executeAssessment = function( paper, researcher, assessment ) {
-    var result;
+Assessor.prototype.executeAssessment = function (paper, researcher, assessment) {
+  var result;
 
-    try {
+  try {
 
-        result = assessment.getResult( paper, researcher, this.i18n );
-        result.setIdentifier( assessment.identifier );
+    result = assessment.getResult(paper, researcher, this.i18n);
+    result.setIdentifier(assessment.identifier);
 
-        if ( result.hasMarks() ) {
-            result.marks = assessment.getMarks( paper, researcher );
-            result.marks = removeDuplicateMarks( result.marks );
-        }
-
-        if ( result.hasMarks() && this.hasMarker( assessment ) ) {
-            this.setHasMarkers( true );
-
-            result.setMarker( this.getMarker( assessment, paper, researcher ) );
-        }
-    } catch ( assessmentError ) {
-        showTrace( assessmentError );
-
-        result = new AssessmentResult();
-
-        result.setScore( -1 );
-        result.setText( this.i18n.sprintf(
-            /* Translators: %1$s expands to the name of the assessment. */
-            this.i18n.dgettext( "js-text-analysis", "An error occurred in the '%1$s' assessment" ),
-            assessment.identifier,
-            assessmentError
-        ) );
+    if (result.hasMarks()) {
+      result.marks = assessment.getMarks(paper, researcher);
+      result.marks = removeDuplicateMarks(result.marks);
     }
-    return result;
+
+    if (result.hasMarks() && this.hasMarker(assessment)) {
+      this.setHasMarkers(true);
+
+      result.setMarker(this.getMarker(assessment, paper, researcher));
+    }
+  } catch (assessmentError) {
+    showTrace(assessmentError);
+
+    result = new AssessmentResult();
+
+    result.setScore(-1);
+    result.setText(this.i18n.sprintf(
+      /* Translators: %1$s expands to the name of the assessment. */
+      this.i18n.dgettext("js-text-analysis", "An error occurred in the '%1$s' assessment"),
+      assessment.identifier,
+      assessmentError
+    ));
+  }
+  return result;
 };
 
 /**
@@ -213,10 +207,10 @@ Assessor.prototype.executeAssessment = function( paper, researcher, assessment )
  *
  * @returns {Array<AssessmentResult>} The array with all the valid assessments.
  */
-Assessor.prototype.getValidResults = function() {
-    return filter( this.results, function( result ) {
-        return this.isValidResult( result );
-    }.bind( this ) );
+Assessor.prototype.getValidResults = function () {
+  return filter(this.results, function (result) {
+    return this.isValidResult(result);
+  }.bind(this));
 };
 
 /**
@@ -225,8 +219,8 @@ Assessor.prototype.getValidResults = function() {
  * @param {object} assessmentResult The assessmentResult to validate.
  * @returns {boolean} whether or not the result is valid.
  */
-Assessor.prototype.isValidResult = function( assessmentResult ) {
-    return assessmentResult.hasScore() && assessmentResult.hasText();
+Assessor.prototype.isValidResult = function (assessmentResult) {
+  return assessmentResult.hasScore() && assessmentResult.hasText();
 };
 
 /**
@@ -235,15 +229,15 @@ Assessor.prototype.isValidResult = function( assessmentResult ) {
  *
  * @returns {number} The overallscore
  */
-Assessor.prototype.calculateOverallScore  = function() {
-    var results = this.getValidResults();
-    var totalScore = 0;
+Assessor.prototype.calculateOverallScore = function () {
+  var results = this.getValidResults();
+  var totalScore = 0;
 
-    forEach( results, function( assessmentResult ) {
-        totalScore += assessmentResult.getScore();
-    } );
+  forEach(results, function (assessmentResult) {
+    totalScore += assessmentResult.getScore();
+  });
 
-    return Math.round( totalScore / ( results.length * ScoreRating ) * 100 ) || 0;
+  return Math.round(totalScore / (results.length * ScoreRating) * 100) || 0;
 };
 
 /**
@@ -254,13 +248,13 @@ Assessor.prototype.calculateOverallScore  = function() {
  * @returns {boolean} Whether registering the assessment was successful.
  * @private
  */
-Assessor.prototype.addAssessment = function( name, assessment ) {
-    if ( ! assessment.hasOwnProperty( "identifier" ) ) {
-        assessment.identifier = name;
-    }
+Assessor.prototype.addAssessment = function (name, assessment) {
+  if (!assessment.hasOwnProperty("identifier")) {
+    assessment.identifier = name;
+  }
 
-    this._assessments.push( assessment );
-    return true;
+  this._assessments.push(assessment);
+  return true;
 };
 
 /**
@@ -269,14 +263,14 @@ Assessor.prototype.addAssessment = function( name, assessment ) {
  * @param {string} name The Assessment to remove from the list of assessments.
  * @returns {void}
  */
-Assessor.prototype.removeAssessment = function( name ) {
-    var toDelete = findIndex( this._assessments, function( assessment ) {
-        return assessment.hasOwnProperty( "identifier" ) && name === assessment.identifier;
-    } );
+Assessor.prototype.removeAssessment = function (name) {
+  var toDelete = findIndex(this._assessments, function (assessment) {
+    return assessment.hasOwnProperty("identifier") && name === assessment.identifier;
+  });
 
-    if ( -1 !== toDelete ) {
-        this._assessments.splice( toDelete, 1 );
-    }
+  if (-1 !== toDelete) {
+    this._assessments.splice(toDelete, 1);
+  }
 };
 
 /**
@@ -285,10 +279,10 @@ Assessor.prototype.removeAssessment = function( name ) {
  * @param {string} identifier The identifier of the assessment.
  * @returns {undefined|Object} The object if found, otherwise undefined.
  */
-Assessor.prototype.getAssessment = function( identifier ) {
-    return find( this._assessments, function( assessment ) {
-        return assessment.hasOwnProperty( "identifier" ) && identifier === assessment.identifier;
-    } );
+Assessor.prototype.getAssessment = function (identifier) {
+  return find(this._assessments, function (assessment) {
+    return assessment.hasOwnProperty("identifier") && identifier === assessment.identifier;
+  });
 };
 
 /**
@@ -296,14 +290,14 @@ Assessor.prototype.getAssessment = function( identifier ) {
  *
  * @returns {Array} The array with applicable assessments.
  */
-Assessor.prototype.getApplicableAssessments = function() {
-    var availableAssessments = this.getAvailableAssessments();
-    return filter(
-        availableAssessments,
-        function( availableAssessment ) {
-            return this.isApplicable( availableAssessment, this.getPaper() );
-        }.bind( this )
-    );
+Assessor.prototype.getApplicableAssessments = function () {
+  var availableAssessments = this.getAvailableAssessments();
+  return filter(
+    availableAssessments,
+    function (availableAssessment) {
+      return this.isApplicable(availableAssessment, this.getPaper());
+    }.bind(this)
+  );
 };
 
 

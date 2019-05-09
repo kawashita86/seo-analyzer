@@ -38,7 +38,7 @@ const ContentAssessor = function( i18n, options = {} ) {
 
     this._assessments = [
 
-        new FleschReadingEase( contentConfiguration( locale ).fleschReading ),
+        //new FleschReadingEase( contentConfiguration( locale ).fleschReading ),
         new SubheadingDistributionTooLong(),
         paragraphTooLong,
         new SentenceLengthInText( contentConfiguration( locale ).sentenceLength ),
