@@ -1,13 +1,13 @@
 import Assessor from "./assessor.js";
-import FleschReadingEase from "yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js";
-import paragraphTooLong from "yoastseo/src/assessments/readability/paragraphTooLongAssessment.js";
-import SentenceLengthInText from "yoastseo/src/assessments/readability/sentenceLengthInTextAssessment.js";
-import SubheadingDistributionTooLong from "yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js";
-import transitionWords from "yoastseo/src/assessments/readability/transitionWordsAssessment.js";
-import passiveVoice from "yoastseo/src/assessments/readability/passiveVoiceAssessment.js";
-import sentenceBeginnings from "yoastseo/src/assessments/readability/sentenceBeginningsAssessment.js";
-import textPresence from "yoastseo/src/assessments/readability/textPresenceAssessment.js";
-import contentConfiguration from "yoastseo/src/config/content/combinedConfig.js";
+//import FleschReadingEase from "yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js";
+//import paragraphTooLong from "yoastseo/src/assessments/readability/paragraphTooLongAssessment.js";
+//import SentenceLengthInText from "yoastseo/src/assessments/readability/sentenceLengthInTextAssessment.js";
+//import SubheadingDistributionTooLong from "yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js";
+//import transitionWords from "yoastseo/src/assessments/readability/transitionWordsAssessment.js";
+//import passiveVoice from "yoastseo/src/assessments/readability/passiveVoiceAssessment.js";
+//import sentenceBeginnings from "yoastseo/src/assessments/readability/sentenceBeginningsAssessment.js";
+//import textPresence from "yoastseo/src/assessments/readability/textPresenceAssessment.js";
+//import contentConfiguration from "yoastseo/src/config/content/combinedConfig.js";
 
 /*
 	Temporarily disabled:
@@ -39,13 +39,13 @@ const ContentAssessor = function( i18n, options = {} ) {
     this._assessments = [
 
         //new FleschReadingEase( contentConfiguration( locale ).fleschReading ),
-        new SubheadingDistributionTooLong(),
-        paragraphTooLong,
-        new SentenceLengthInText( contentConfiguration( locale ).sentenceLength ),
-        transitionWords,
-        passiveVoice,
-        textPresence,
-        sentenceBeginnings,
+        //new SubheadingDistributionTooLong(),
+        //paragraphTooLong,
+        //new SentenceLengthInText( contentConfiguration( locale ).sentenceLength ),
+        //transitionWords,
+        //passiveVoice,
+        //textPresence,
+        //sentenceBeginnings,
         // Temporarily disabled: wordComplexity,
     ];
 };

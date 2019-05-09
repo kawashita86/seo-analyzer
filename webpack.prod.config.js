@@ -1,6 +1,6 @@
 // Imports
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 require("@babel/register");
 // Webpack Configuration
 const config = {
@@ -31,14 +31,11 @@ const config = {
             }
         ]
     },
+
     // Plugins
- /*   plugins: [
-        new HtmlWebpackPlugin({
-            template: './index.html',
-            filename: 'index.html',
-            hash: true
-        })
-    ],*/
+    plugins: [
+        new BundleAnalyzerPlugin()
+    ],
     // OPTIONAL
     // Reload On File Change
     // Development Tools (Map Errors To Source File)

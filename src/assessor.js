@@ -1,10 +1,9 @@
-import Researcher from "yoastseo/src/researcher.js";
 import MissingArgument from "yoastseo/src/errors/missingArgument";
 import removeDuplicateMarks from "yoastseo/src/markers/removeDuplicateMarks";
 import AssessmentResult from "yoastseo/src/values/AssessmentResult.js";
 import {showTrace} from "yoastseo/src/helpers/errors.js";
 import {isUndefined, isFunction, forEach, filter, map, findIndex, find} from "lodash-es";
-import {ResearcherCustom} from "./researcher";
+import Researcher from "./researcher";
 
 var ScoreRating = 9;
 
@@ -123,7 +122,7 @@ Assessor.prototype.getMarker = function (assessment, paper, researcher) {
  */
 Assessor.prototype.assess = function (paper) {
   if (isUndefined(this._researcher)) {
-    this._researcher = new ResearcherCustom(paper);
+    this._researcher = new Researcher(paper);
   } else {
     this._researcher.setPaper(paper);
   }

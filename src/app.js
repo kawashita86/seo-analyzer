@@ -20,7 +20,7 @@ import KeyphraseDistributionAssessment from "yoastseo/src/assessments/seo/Keyphr
 import ContentAssessor from "./contentAssessor.js";
 //import CornerstoneSEOAssessor from "yoastseo/src/cornerstone/seoAssessor.js";
 //import CornerstoneContentAssessor from "yoastseo/src/cornerstone/contentAssessor.js";
-import Researcher from "yoastseo/src/researcher.js";
+//import Researcher from "yoastseo/src/researcher.js";
 import AssessorPresenter from "yoastseo/src/renderers/AssessorPresenter.js";
 import Pluggable from "yoastseo/src/pluggable.js";
 import Paper from "yoastseo/src/values/Paper.js";
@@ -29,7 +29,7 @@ import {sprintf} from "./helpers/sprintf";
 
 import removeHtmlBlocks from "yoastseo/src/stringProcessing/htmlParser.js";
 import charCountIntText from "./researches/charCountIntText";
-import {ResearcherCustom} from "./researcher";
+import Researcher from "./researcher";
 
 const keyphraseDistribution = new KeyphraseDistributionAssessment();
 
@@ -62,7 +62,7 @@ var defaults = {
         "keywordDensity",
         "subHeadings",
         "stopwords",
-        "fleschReading",
+        //"fleschReading",
         "linkCount",
         "imageCount",
         "urlKeyword",
@@ -92,7 +92,7 @@ var defaults = {
     marker: function() {},
     keywordAnalysisActive: true,
     contentAnalysisActive: true,
-    hasSnippetPreview: true,
+    hasSnippetPreview: false,
     debounceRefresh: true,
 };
 
@@ -696,10 +696,8 @@ App.prototype.runAnalyzer = function() {
 
     // The new researcher
     if ( isUndefined( this.researcher ) ) {
-        this.researcher = new ResearcherCustom( this.paper );
-        this.researcher.addResearch("charCount", charCountIntText);
+        this.researcher = new Researcher( this.paper );
     } else {
-        this.researcher.addResearch("charCount", charCountIntText);
         this.researcher.setPaper( this.paper );
     }
 

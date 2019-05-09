@@ -1,9 +1,6 @@
 //import SnippetPreview from "./snippetPreview";
 import App from "./app";
 
-import { forEach } from "lodash-es";
-import { escape } from "lodash-es";
-
 /**
  * Set the locale.
  *
@@ -23,14 +20,9 @@ var bindEvents = function( app ) {
         document.getElementById( elems[ i ] ).addEventListener( "input", app.refresh.bind( app ) );
     }
 
-  //  document.getElementById( "locale" ).addEventListener( "input", setLocale.bind( app ) );
 };
 
 window.onload = function() {
-
-   /* var snippetPreview = new SnippetPreview( {
-        targetElement: document.getElementById( "snippet" ),
-    } );*/
 
     var app = new App( {
         hasSnippetPreview: false,
