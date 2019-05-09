@@ -45,10 +45,12 @@ window.onload = function() {
                     keyword: document.getElementById( "focusKeyword" ).value,
                     text: document.getElementById( "content" ).value,
                     synonyms: document.getElementById( "synonyms" ).value,
+                    metaTitle: document.getElementById( "title" ).value,
+                    meta: document.getElementById( "subtitle" ).value,
                 };
             },
         },
-        marker: function( paper, marks ) {
+        /*marker: function( paper, marks ) {
             var text = paper.getText();
 
             forEach( marks, function( mark ) {
@@ -58,9 +60,10 @@ window.onload = function() {
             document.getElementsByClassName( "marked-text" )[ 0 ].innerHTML = text;
 
             document.getElementsByClassName( "marked-text-raw" )[ 0 ].innerHTML = escape( text );
-        },
+        },*/
     } );
 
+    app.disableMarkers();
     bindEvents( app );
     app.initializeAssessors( app.config );
     app.initAssessorPresenters();

@@ -13,8 +13,15 @@
             <div class="content-sidebar-wrap">
                 <div id="input" class="form-container">
                     <div id="inputForm" class="inputForm">
-                        <label for="locale">Locale</label>
-                        <input type="text" id="locale" name="locale" placeholder="en_US"/>
+                        <input type="hidden" id="locale" name="locale" placeholder="it_IT"/>
+
+
+                        <label for="focusKeyword">Title</label>
+                        <input type="text" id="title" name="title" placeholder="Write your title!"/>
+
+
+                        <label for="focusKeyword">Subtitle</label>
+                        <input type="text" id="subtitle" name="subtitle" placeholder="Write your subtitle!"/>
 
                         <label for="content">Text</label>
                         <textarea id="content" name="content" placeholder="Start writing your text!"></textarea>
@@ -24,9 +31,6 @@
 
                         <label for="synonyms">Synonyms</label>
                         <input type="text" id="synonyms" name="synonyms" placeholder="Choose synonyms"/>
-
-                        <label for="premium">Premium</label>
-                        <input type="checkbox" id="premium" name="premium"/>
 
                         <button type="button" id="refresh-analysis">Refresh!</button>
                     </div>
