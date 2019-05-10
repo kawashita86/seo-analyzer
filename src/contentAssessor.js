@@ -1,4 +1,4 @@
-import Assessor from "./assessor.js";
+import Assessor from "./assessor2.js";
 //import FleschReadingEase from "yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js";
 //import paragraphTooLong from "yoastseo/src/assessments/readability/paragraphTooLongAssessment.js";
 //import SentenceLengthInText from "yoastseo/src/assessments/readability/sentenceLengthInTextAssessment.js";
