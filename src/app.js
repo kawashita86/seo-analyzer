@@ -92,7 +92,7 @@ var defaults = {
     marker: function() {},
     keywordAnalysisActive: true,
     contentAnalysisActive: true,
-    hasSnippetPreview: false,
+    hasSnippetPreview: true,
     debounceRefresh: true,
 };
 
