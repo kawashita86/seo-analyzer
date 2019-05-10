@@ -1,3 +1,4 @@
+import {stripFullTags} from 'yoastseo/src/stringProcessing/stripHTMLTags'
 /**
  * Calculates the characters of a certain text.
  *
@@ -5,6 +6,6 @@
  * @returns {int} The characters count of the given text.
  */
 export default function (text) {
-  return (text.match(/[^\s]/g) || []).length;
+  return (stripFullTags(text).match(/[^\s]/g) || []).length;
 
 }
