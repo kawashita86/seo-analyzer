@@ -95,7 +95,7 @@ var Researcher = function( paper ) {
     morphology: morphology,
     functionWordsInKeyphrase: functionWordsInKeyphrase,
     h1s: h1s,
-    charCountIntText: charCountIntText
+    charCount: charCountIntText
   };
 
   this._data = {};

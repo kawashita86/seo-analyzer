@@ -9,7 +9,7 @@ export default class Assessor {
   constructor(i18n, options = {}) {
     this.setI18n(i18n);
     this.options = options;
-    this.assessments = [];
+    this._assessments = [];
     this.type = "Assessor";
 
     if (this.options.hasOwnProperty('researcher')) {
@@ -25,12 +25,12 @@ export default class Assessor {
   }
 
   getAvailableAssessments() {
-    return this.assessments;
+    return this._assessments;
   }
 
-  static isApplicable(assessment, paper, researcher) {
+  isApplicable(assessment, paper, researcher) {
     if (assessment.hasOwnProperty("isApplicable") || typeof Assessor.isApplicable === "function") {
-      return Assessor.isApplicable(paper, researcher);
+      return assessment.isApplicable(paper, researcher);
     }
 
     return true;
@@ -50,7 +50,7 @@ export default class Assessor {
     let assessments = this.getAvailableAssessments();
     this.results = [];
 
-    assessments = assessments.filter((assessment) => Assessor.isApplicable(assessment, paper, this.researcher));
+    assessments = assessments.filter((assessment) => this.isApplicable(assessment, paper, this.researcher));
 
     this.results = assessments.map(assessment => this.executeAssessment(paper, this.researcher, assessment));
 
@@ -102,21 +102,21 @@ export default class Assessor {
       assessment.identifier = name;
     }
 
-    this.assessments.push(assessment);
+    this._assessments.push(assessment);
     return true;
   }
 
   removeAssessment(name) {
-    const toDelete = this.assessments.findIndex(assessment =>
+    const toDelete = this._assessments.findIndex(assessment =>
       assessment.hasOwnProperty("identifier") && name === assessment.identifier);
 
     if (-1 !== toDelete) {
-      this.assessments.splice(toDelete, 1);
+      this._assessments.splice(toDelete, 1);
     }
   }
 
   getAssessment(identifier) {
-    return this.assessments.find(assessment =>
+    return this._assessments.find(assessment =>
       assessment.hasOwnProperty("identifier") && identifier === assessment.identifier
     );
   }
@@ -124,7 +124,7 @@ export default class Assessor {
   getApplicableAssessments() {
     const availableAssessments = this.getAvailableAssessments();
     return availableAssessments.filter(availableAssessment =>
-      Assessor.isApplicable(availableAssessment, this.getPaper())
+      this.isApplicable(availableAssessment, this.getPaper())
     );
   }
 }

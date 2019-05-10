@@ -2,16 +2,6 @@ import Assessor from "../src/seoAssessor.js";
 import Paper from "yoastseo/src/values/Paper.js";
 import factory from "./testHelpers/factory.js";
 import getResults from "./testHelpers/getAssessorResults";
-import IntroductionKeywordAssessment from "yoastseo/src/assessments/seo/IntroductionKeywordAssessment";
-import KeywordDensityAssessment from "yoastseo/src/assessments/seo/KeywordDensityAssessment";
-import MetaDescriptionKeywordAssessment from "yoastseo/src/assessments/seo/MetaDescriptionKeywordAssessment";
-import SubheadingsKeyword from "yoastseo/src/assessments/seo/SubHeadingsKeywordAssessment";
-import TextCompetingLinksAssessment from "yoastseo/src/assessments/seo/TextCompetingLinksAssessment";
-import TextImages from "yoastseo/src/assessments/seo/TextImagesAssessment";
-import TitleKeywordAssessment from "yoastseo/src/assessments/seo/TitleKeywordAssessment";
-import InternalLinksAssessment from "yoastseo/src/assessments/seo/InternalLinksAssessment";
-import TitleWidth from "yoastseo/src/assessments/seo/PageTitleWidthAssessment";
-import CharLengthAssessment from "../src/assessments/seo/CharLengthAssessment";
 const i18n = factory.buildJed();
 
 describe( "running assessments in the assessor", function() {

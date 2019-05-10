@@ -1,13 +1,4 @@
 import Assessor from "./assessor2.js";
-//import FleschReadingEase from "yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js";
-//import paragraphTooLong from "yoastseo/src/assessments/readability/paragraphTooLongAssessment.js";
-//import SentenceLengthInText from "yoastseo/src/assessments/readability/sentenceLengthInTextAssessment.js";
-//import SubheadingDistributionTooLong from "yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js";
-//import transitionWords from "yoastseo/src/assessments/readability/transitionWordsAssessment.js";
-//import passiveVoice from "yoastseo/src/assessments/readability/passiveVoiceAssessment.js";
-//import sentenceBeginnings from "yoastseo/src/assessments/readability/sentenceBeginningsAssessment.js";
-//import textPresence from "yoastseo/src/assessments/readability/textPresenceAssessment.js";
-//import contentConfiguration from "yoastseo/src/config/content/combinedConfig.js";
 
 /*
 	Temporarily disabled:
@@ -34,7 +25,7 @@ export default class ContentAssessor extends Assessor {
     this.type = "ContentAssessor";
     this.locale = (options.hasOwnProperty("locale")) ? options.locale : "en_US";
 
-    this.assessments = [
+    this._assessments = [
       //new FleschReadingEase( contentConfiguration( locale ).fleschReading ),
       //new SubheadingDistributionTooLong(),
       //paragraphTooLong,
@@ -71,7 +62,7 @@ export default class ContentAssessor extends Assessor {
     }
   }
 
-  allAssessmentsSupported() {
+  _allAssessmentsSupported() {
     const numberOfAssessments = 8;
     const applicableAssessments = this.getApplicableAssessments();
     return applicableAssessments.length === numberOfAssessments;
@@ -83,7 +74,7 @@ export default class ContentAssessor extends Assessor {
     const penaltyPoints = results.map(result => {
       const rating = scoreToRating(result.getScore());
 
-      if (this.allAssessmentsSupported()) {
+      if (this._allAssessmentsSupported()) {
         return ContentAssessor.calculatePenaltyPointsFullSupport(rating);
       }
 
@@ -93,13 +84,13 @@ export default class ContentAssessor extends Assessor {
     return penaltyPoints.reduce((acc, n) => acc + n);
   }
 
-  ratePenaltyPoints(totalPenaltyPoints) {
+  _ratePenaltyPoints(totalPenaltyPoints) {
     if (this.getValidResults().length === 1) {
       // If we have only 1 result, we only have a "no content" result
       return 30;
     }
 
-    if (this.allAssessmentsSupported()) {
+    if (this._allAssessmentsSupported()) {
       // Determine the total score based on the total penalty points.
       if (totalPenaltyPoints > 6) {
         // A red indicator.
@@ -135,6 +126,6 @@ export default class ContentAssessor extends Assessor {
 
     const totalPenaltyPoints = this.calculatePenaltyPoints();
 
-    return this.ratePenaltyPoints(totalPenaltyPoints);
+    return this._ratePenaltyPoints(totalPenaltyPoints);
   }
 }
