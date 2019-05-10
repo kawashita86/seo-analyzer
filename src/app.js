@@ -2,18 +2,18 @@ import "./config/config.js";
 import SnippetPreview from "./snippetPreview.js";
 //const localeConfig = require(`${LOCALE_ROOT}/config`)
 
-import { defaultsDeep } from "lodash-es";
-import { isObject } from "lodash-es";
-import { isString } from "lodash-es";
+import {defaultsDeep} from "lodash-es";
+import {isObject} from "lodash-es";
+import {isString} from "lodash-es";
 import MissingArgument from "yoastseo/src/errors/missingArgument";
-import { isUndefined } from "lodash-es";
-import { isEmpty } from "lodash-es";
-import { isFunction } from "lodash-es";
-import { isArray } from "lodash-es";
-import { forEach } from "lodash-es";
-import { debounce } from "lodash-es";
-import { throttle } from "lodash-es";
-import { merge } from "lodash-es";
+import {isUndefined} from "lodash-es";
+import {isEmpty} from "lodash-es";
+import {isFunction} from "lodash-es";
+import {isArray} from "lodash-es";
+import {forEach} from "lodash-es";
+import {debounce} from "lodash-es";
+import {throttle} from "lodash-es";
+import {merge} from "lodash-es";
 
 import SEOAssessor from "./seoAssessor.js";
 import KeyphraseDistributionAssessment from "yoastseo/src/assessments/seo/KeyphraseDistributionAssessment.js";
@@ -24,11 +24,10 @@ import ContentAssessor from "./contentAssessor.js";
 import AssessorPresenter from "yoastseo/src/renderers/AssessorPresenter.js";
 import Pluggable from "yoastseo/src/pluggable.js";
 import Paper from "yoastseo/src/values/Paper.js";
-import { measureTextWidth } from "yoastseo/src/helpers/createMeasurementElement.js";
+import {measureTextWidth} from "yoastseo/src/helpers/createMeasurementElement.js";
 import {sprintf} from "./helpers/sprintf";
 
 import removeHtmlBlocks from "yoastseo/src/stringProcessing/htmlParser.js";
-import charCountIntText from "./researches/charCountIntText";
 import Researcher from "./researcher";
 
 const keyphraseDistribution = new KeyphraseDistributionAssessment();
@@ -41,59 +40,68 @@ var inputDebounceDelay = 800;
  * @type {Object}
  */
 var defaults = {
-    callbacks: {
-        bindElementEvents: function() {},
-        updateSnippetValues: function() {},
-        saveScores: function() {},
-        saveContentScore: function() {},
-        updatedContentResults: function() {},
-        updatedKeywordsResults: function() {},
+  callbacks: {
+    bindElementEvents: function () {
     },
-    sampleText: {
-        baseUrl: "example.org/",
-        snippetCite: "example-post/",
-        title: "This is an example title - edit by clicking here",
-        keyword: "Choose a focus keyword",
-        meta: "Modify your meta description by editing it right here",
-        text: "Start writing your text!",
+    updateSnippetValues: function () {
     },
-    queue: [ "wordCount",
-        "charCount",
-        "keywordDensity",
-        "subHeadings",
-        "stopwords",
-        //"fleschReading",
-        "linkCount",
-        "imageCount",
-        "urlKeyword",
-        "urlLength",
-        "metaDescription",
-        "pageTitleKeyword",
-        "pageTitleWidth",
-        "firstParagraph",
-        "keywordDoubles" ],
-    typeDelay: 3000,
-    typeDelayStep: 1500,
-    maxTypeDelay: 5000,
-    dynamicDelay: true,
-    locale: "en_US",
-    translations: {
-        domain: "js-text-analysis",
-        // eslint-disable-next-line camelcase
-        locale_data: {
-            "js-text-analysis": {
-                "": {},
-            },
-        },
+    saveScores: function () {
     },
-    replaceTarget: [],
-    resetTarget: [],
-    elementTarget: [],
-    marker: function() {},
-    keywordAnalysisActive: true,
-    contentAnalysisActive: true,
-    hasSnippetPreview: true,
-    debounceRefresh: true,
+    saveContentScore: function () {
+    },
+    updatedContentResults: function () {
+    },
+    updatedKeywordsResults: function () {
+    },
+  },
+  sampleText: {
+    baseUrl: "example.org/",
+    snippetCite: "example-post/",
+    title: "This is an example title - edit by clicking here",
+    keyword: "Choose a focus keyword",
+    meta: "Modify your meta description by editing it right here",
+    text: "Start writing your text!",
+  },
+  queue: [
+    // "wordCount",
+    "charCount",
+    "keywordDensity",
+    "subHeadings",
+    "stopwords",
+    //"fleschReading",
+    "linkCount",
+    // "imageCount",
+    "urlKeyword",
+    // "urlLength",
+    "metaDescription",
+    "pageTitleKeyword",
+    // "pageTitleWidth",
+    // "firstParagraph",
+    "keywordDoubles"
+  ],
+  typeDelay: 3000,
+  typeDelayStep: 1500,
+  maxTypeDelay: 5000,
+  dynamicDelay: true,
+  locale: "en_US",
+  translations: {
+    domain: "js-text-analysis",
+    // eslint-disable-next-line camelcase
+    locale_data: {
+      "js-text-analysis": {
+        "": {},
+      },
+    },
+  },
+  replaceTarget: [],
+  resetTarget: [],
+  elementTarget: [],
+  marker: function () {
+  },
+  keywordAnalysisActive: true,
+  contentAnalysisActive: true,
+  hasSnippetPreview: true,
+  debounceRefresh: true,
 };
 
 /**
@@ -105,15 +113,15 @@ var defaults = {
  * @returns {SnippetPreview} The SnippetPreview object.
  */
 function createDefaultSnippetPreview() {
-    var targetElement = document.getElementById( this.config.targets.snippet );
+  var targetElement = document.getElementById(this.config.targets.snippet);
 
-    return new SnippetPreview( {
-        analyzerApp: this,
-        targetElement: targetElement,
-        callbacks: {
-            saveSnippetData: this.config.callbacks.saveSnippetData,
-        },
-    } );
+  return new SnippetPreview({
+    analyzerApp: this,
+    targetElement: targetElement,
+    callbacks: {
+      saveSnippetData: this.config.callbacks.saveSnippetData,
+    },
+  });
 }
 
 /**
@@ -122,8 +130,8 @@ function createDefaultSnippetPreview() {
  * @param   {*}         snippetPreview  The 'object' to check against.
  * @returns {boolean}                   Whether or not it's a valid SnippetPreview object.
  */
-function isValidSnippetPreview( snippetPreview ) {
-    return ! isUndefined( snippetPreview ) && SnippetPreview.prototype.isPrototypeOf( snippetPreview );
+function isValidSnippetPreview(snippetPreview) {
+  return !isUndefined(snippetPreview) && SnippetPreview.prototype.isPrototypeOf(snippetPreview);
 }
 
 /**
@@ -133,23 +141,23 @@ function isValidSnippetPreview( snippetPreview ) {
  * @param {Object}      args            The arguments object passed to the App.
  * @returns {void}
  */
-function verifyArguments( args ) {
-    if ( ! isObject( args.callbacks.getData ) ) {
-        throw new MissingArgument( "The app requires an object with a getdata callback." );
-    }
+function verifyArguments(args) {
+  if (!isObject(args.callbacks.getData)) {
+    throw new MissingArgument("The app requires an object with a getdata callback.");
+  }
 
-    if ( ! isObject( args.targets ) ) {
-        throw new MissingArgument( "`targets` is a required App argument, `targets` is not an object." );
-    }
+  if (!isObject(args.targets)) {
+    throw new MissingArgument("`targets` is a required App argument, `targets` is not an object.");
+  }
 
-    // The args.targets.snippet argument is only required if not SnippetPreview object has been passed.
-    if (
-        args.hasSnippetPreview &&
-        ! isValidSnippetPreview( args.snippetPreview ) &&
-        ! isString( args.targets.snippet ) ) {
-        throw new MissingArgument( "A snippet preview is required. When no SnippetPreview object isn't passed to " +
-            "the App, the `targets.snippet` is a required App argument. `targets.snippet` is not a string." );
-    }
+  // The args.targets.snippet argument is only required if not SnippetPreview object has been passed.
+  if (
+    args.hasSnippetPreview &&
+    !isValidSnippetPreview(args.snippetPreview) &&
+    !isString(args.targets.snippet)) {
+    throw new MissingArgument("A snippet preview is required. When no SnippetPreview object isn't passed to " +
+      "the App, the `targets.snippet` is a required App argument. `targets.snippet` is not a string.");
+  }
 }
 
 /**
@@ -253,67 +261,67 @@ function verifyArguments( args ) {
  *
  * @constructor
  */
-var App = function( args ) {
-    if ( ! isObject( args ) ) {
-        args = {};
+var App = function (args) {
+  if (!isObject(args)) {
+    args = {};
+  }
+
+  defaultsDeep(args, defaults);
+
+  verifyArguments(args);
+
+  this.config = args;
+
+  if (args.debouncedRefresh === true) {
+    this.refresh = debounce(this.refresh.bind(this), inputDebounceDelay);
+  }
+  this._pureRefresh = throttle(this._pureRefresh.bind(this), this.config.typeDelay);
+
+  this.callbacks = this.config.callbacks;
+  //this.i18n = this.constructI18n( this.config.translations );
+  this.i18n = {
+    dgettext: (domain, value) => {
+      return value;
+    },
+    sprintf,
+    dngettext: (domain, value) => {
+      return value;
+    },
+  };
+
+  this.initializeAssessors(args);
+
+  this.pluggable = new Pluggable(this);
+
+  this.getData();
+
+  this.defaultOutputElement = this.getDefaultOutputElement(args);
+
+  if (this.defaultOutputElement !== "") {
+    this.showLoadingDialog();
+  }
+
+  if (isValidSnippetPreview(args.snippetPreview)) {
+    this.snippetPreview = args.snippetPreview;
+
+    /* Hack to make sure the snippet preview always has a reference to this App. This way we solve the circular
+    dependency issue. In the future this should be solved by the snippet preview not having a reference to the
+    app.*/
+    if (this.snippetPreview.refObj !== this) {
+      this.snippetPreview.refObj = this;
+      this.snippetPreview._i18n = this.i18n;
     }
+  } else if (args.hasSnippetPreview) {
+    this.snippetPreview = createDefaultSnippetPreview.call(this);
+  }
 
-    defaultsDeep( args, defaults );
+  this._assessorOptions = {
+    useCornerStone: false,
+    useKeywordDistribution: false,
+  };
 
-    verifyArguments( args );
-
-    this.config = args;
-
-    if ( args.debouncedRefresh === true ) {
-        this.refresh = debounce( this.refresh.bind( this ), inputDebounceDelay );
-    }
-    this._pureRefresh = throttle( this._pureRefresh.bind( this ), this.config.typeDelay );
-
-    this.callbacks = this.config.callbacks;
-    //this.i18n = this.constructI18n( this.config.translations );
-    this.i18n = {
-        dgettext: (domain, value) => {
-            return value;
-        },
-        sprintf,
-        dngettext: (domain, value) => {
-            return value;
-        },
-    };
-
-    this.initializeAssessors( args );
-
-    this.pluggable = new Pluggable( this );
-
-    this.getData();
-
-    this.defaultOutputElement = this.getDefaultOutputElement( args );
-
-    if ( this.defaultOutputElement !== "" ) {
-        this.showLoadingDialog();
-    }
-
-    if ( isValidSnippetPreview( args.snippetPreview ) ) {
-        this.snippetPreview = args.snippetPreview;
-
-        /* Hack to make sure the snippet preview always has a reference to this App. This way we solve the circular
-        dependency issue. In the future this should be solved by the snippet preview not having a reference to the
-        app.*/
-        if ( this.snippetPreview.refObj !== this ) {
-            this.snippetPreview.refObj = this;
-            this.snippetPreview._i18n = this.i18n;
-        }
-    } else if ( args.hasSnippetPreview ) {
-        this.snippetPreview = createDefaultSnippetPreview.call( this );
-    }
-
-    this._assessorOptions = {
-        useCornerStone: false,
-        useKeywordDistribution: false,
-    };
-
-    this.initSnippetPreview();
-    this.initAssessorPresenters();
+  this.initSnippetPreview();
+  this.initAssessorPresenters();
 };
 
 /**
@@ -322,16 +330,16 @@ var App = function( args ) {
  * @param {Object} args The arguments passed to the App.
  * @returns {string} The ID of the target that is active.
  */
-App.prototype.getDefaultOutputElement = function( args ) {
-    if ( args.keywordAnalysisActive ) {
-        return args.targets.output;
-    }
+App.prototype.getDefaultOutputElement = function (args) {
+  if (args.keywordAnalysisActive) {
+    return args.targets.output;
+  }
 
-    if ( args.contentAnalysisActive ) {
-        return args.targets.contentOutput;
-    }
+  if (args.contentAnalysisActive) {
+    return args.targets.contentOutput;
+  }
 
-    return "";
+  return "";
 };
 
 /**
@@ -340,16 +348,16 @@ App.prototype.getDefaultOutputElement = function( args ) {
  * @param {Object} assessorOptions The specific options.
  * @returns {void}
  */
-App.prototype.changeAssessorOptions = function( assessorOptions ) {
-    this._assessorOptions = merge( this._assessorOptions, assessorOptions );
+App.prototype.changeAssessorOptions = function (assessorOptions) {
+  this._assessorOptions = merge(this._assessorOptions, assessorOptions);
 
-    // Set the assessors based on the new assessor options.
-    this.seoAssessor = this.getSeoAssessor();
-    this.contentAssessor = this.getContentAssessor();
+  // Set the assessors based on the new assessor options.
+  this.seoAssessor = this.getSeoAssessor();
+  this.contentAssessor = this.getContentAssessor();
 
-    // Refresh everything so the user sees the changes.
-    this.initAssessorPresenters();
-    this.refresh();
+  // Refresh everything so the user sees the changes.
+  this.initAssessorPresenters();
+  this.refresh();
 };
 
 /**
@@ -357,15 +365,15 @@ App.prototype.changeAssessorOptions = function( assessorOptions ) {
  *
  * @returns {Assessor} The assessor instance.
  */
-App.prototype.getSeoAssessor = function() {
-    const { useCornerStone, useKeywordDistribution } = this._assessorOptions;
+App.prototype.getSeoAssessor = function () {
+  const {useCornerStone, useKeywordDistribution} = this._assessorOptions;
 
-    const assessor = useCornerStone ? this.cornerStoneSeoAssessor : this.defaultSeoAssessor;
-    if ( useKeywordDistribution && isUndefined( assessor.getAssessment( "keyphraseDistribution" ) ) ) {
-        assessor.addAssessment( "keyphraseDistribution", keyphraseDistribution );
-    }
+  const assessor = useCornerStone ? this.cornerStoneSeoAssessor : this.defaultSeoAssessor;
+  if (useKeywordDistribution && isUndefined(assessor.getAssessment("keyphraseDistribution"))) {
+    assessor.addAssessment("keyphraseDistribution", keyphraseDistribution);
+  }
 
-    return assessor;
+  return assessor;
 };
 
 /**
@@ -373,14 +381,14 @@ App.prototype.getSeoAssessor = function() {
  *
  * @returns {Assessor} The assessor instance.
  */
-App.prototype.getContentAssessor = function() {
-    const { useCornerStone } = this._assessorOptions;
+App.prototype.getContentAssessor = function () {
+  const {useCornerStone} = this._assessorOptions;
 
-    if ( useCornerStone ) {
-        return this.cornerStoneContentAssessor;
-    }
+  if (useCornerStone) {
+    return this.cornerStoneContentAssessor;
+  }
 
-    return this.defaultContentAssessor;
+  return this.defaultContentAssessor;
 };
 
 /**
@@ -389,9 +397,9 @@ App.prototype.getContentAssessor = function() {
  * @param {Object} args The arguments passed to the App.
  * @returns {void}
  */
-App.prototype.initializeAssessors = function( args ) {
-    this.initializeSEOAssessor( args );
-    this.initializeContentAssessor( args );
+App.prototype.initializeAssessors = function (args) {
+  this.initializeSEOAssessor(args);
+  this.initializeContentAssessor(args);
 };
 
 /**
@@ -400,20 +408,20 @@ App.prototype.initializeAssessors = function( args ) {
  * @param {Object} args The arguments passed to the App.
  * @returns {void}
  */
-App.prototype.initializeSEOAssessor = function( args ) {
-    if ( ! args.keywordAnalysisActive ) {
-        return;
-    }
+App.prototype.initializeSEOAssessor = function (args) {
+  if (!args.keywordAnalysisActive) {
+    return;
+  }
 
-    this.defaultSeoAssessor = new SEOAssessor( this.i18n, { marker: this.config.marker } );
-    //this.cornerStoneSeoAssessor = new CornerstoneSEOAssessor( this.i18n, { marker: this.config.marker } );
+  this.defaultSeoAssessor = new SEOAssessor(this.i18n, {marker: this.config.marker});
+  //this.cornerStoneSeoAssessor = new CornerstoneSEOAssessor( this.i18n, { marker: this.config.marker } );
 
-    // Set the assessor
-    if ( isUndefined( args.seoAssessor ) ) {
-        this.seoAssessor = this.defaultSeoAssessor;
-    } else {
-        this.seoAssessor = args.seoAssessor;
-    }
+  // Set the assessor
+  if (isUndefined(args.seoAssessor)) {
+    this.seoAssessor = this.defaultSeoAssessor;
+  } else {
+    this.seoAssessor = args.seoAssessor;
+  }
 };
 
 /**
@@ -422,20 +430,23 @@ App.prototype.initializeSEOAssessor = function( args ) {
  * @param {Object} args The arguments passed to the App.
  * @returns {void}
  */
-App.prototype.initializeContentAssessor = function( args ) {
-    if ( ! args.contentAnalysisActive ) {
-        return;
-    }
+App.prototype.initializeContentAssessor = function (args) {
+  if (!args.contentAnalysisActive) {
+    return;
+  }
 
-    this.defaultContentAssessor = new ContentAssessor( this.i18n, { marker: this.config.marker, locale: this.config.locale }  );
-    //this.cornerStoneContentAssessor = new CornerstoneContentAssessor( this.i18n, { marker: this.config.marker, locale: this.config.locale } );
+  this.defaultContentAssessor = new ContentAssessor(this.i18n, {
+    marker: this.config.marker,
+    locale: this.config.locale
+  });
+  //this.cornerStoneContentAssessor = new CornerstoneContentAssessor( this.i18n, { marker: this.config.marker, locale: this.config.locale } );
 
-    // Set the content assessor
-    if ( isUndefined( args._contentAssessor ) ) {
-        this.contentAssessor = this.defaultContentAssessor;
-    } else {
-        this.contentAssessor = args._contentAssessor;
-    }
+  // Set the content assessor
+  if (isUndefined(args._contentAssessor)) {
+    this.contentAssessor = this.defaultContentAssessor;
+  } else {
+    this.contentAssessor = args._contentAssessor;
+  }
 };
 
 /**
@@ -444,11 +455,11 @@ App.prototype.initializeContentAssessor = function( args ) {
  * @param   {Object}    args    The arguments to be extended.
  * @returns {Object}    args    The extended arguments.
  */
-App.prototype.extendConfig = function( args ) {
-    args.sampleText = this.extendSampleText( args.sampleText );
-    args.locale = args.locale || "en_US";
+App.prototype.extendConfig = function (args) {
+  args.sampleText = this.extendSampleText(args.sampleText);
+  args.locale = args.locale || "en_US";
 
-    return args;
+  return args;
 };
 
 /**
@@ -457,20 +468,20 @@ App.prototype.extendConfig = function( args ) {
  * @param   {Object}    sampleText  The sample text to be extended.
  * @returns {Object}    sampleText  The extended sample text.
  */
-App.prototype.extendSampleText = function( sampleText ) {
-    var defaultSampleText = defaults.sampleText;
+App.prototype.extendSampleText = function (sampleText) {
+  var defaultSampleText = defaults.sampleText;
 
-    if ( isUndefined( sampleText ) ) {
-        return defaultSampleText;
+  if (isUndefined(sampleText)) {
+    return defaultSampleText;
+  }
+
+  for (var key in sampleText) {
+    if (isUndefined(sampleText[key])) {
+      sampleText[key] = defaultSampleText[key];
     }
+  }
 
-    for ( var key in sampleText ) {
-        if ( isUndefined( sampleText[ key ] ) ) {
-            sampleText[ key ] = defaultSampleText[ key ];
-        }
-    }
-
-    return sampleText;
+  return sampleText;
 };
 
 
@@ -481,14 +492,14 @@ App.prototype.extendSampleText = function( sampleText ) {
  *
  * @returns {void}
  */
-App.prototype.registerCustomDataCallback = function( callback ) {
-    if ( ! this.callbacks.custom ) {
-        this.callbacks.custom = [];
-    }
+App.prototype.registerCustomDataCallback = function (callback) {
+  if (!this.callbacks.custom) {
+    this.callbacks.custom = [];
+  }
 
-    if ( isFunction( callback ) ) {
-        this.callbacks.custom.push( callback );
-    }
+  if (isFunction(callback)) {
+    this.callbacks.custom.push(callback);
+  }
 };
 
 /**
@@ -496,35 +507,35 @@ App.prototype.registerCustomDataCallback = function( callback ) {
  *
  * @returns {void}
  */
-App.prototype.getData = function() {
-    this.rawData = this.callbacks.getData();
+App.prototype.getData = function () {
+  this.rawData = this.callbacks.getData();
 
-    // Add the custom data to the raw data.
-    if ( isArray( this.callbacks.custom ) ) {
-        this.callbacks.custom.forEach( ( customCallback ) => {
-            const customData = customCallback();
+  // Add the custom data to the raw data.
+  if (isArray(this.callbacks.custom)) {
+    this.callbacks.custom.forEach((customCallback) => {
+      const customData = customCallback();
 
-            this.rawData = merge( this.rawData, customData );
-        } );
-    }
+      this.rawData = merge(this.rawData, customData);
+    });
+  }
 
-    if ( this.hasSnippetPreview() ) {
-        // Gets the data FOR the analyzer
-        var data = this.snippetPreview.getAnalyzerData();
+  if (this.hasSnippetPreview()) {
+    // Gets the data FOR the analyzer
+    var data = this.snippetPreview.getAnalyzerData();
 
-        this.rawData.metaTitle = data.title;
-        this.rawData.url = data.url;
-        this.rawData.meta = data.metaDesc;
-    }
+    this.rawData.metaTitle = data.title;
+    this.rawData.url = data.url;
+    this.rawData.meta = data.metaDesc;
+  }
 
-    if ( this.pluggable.loaded ) {
-        this.rawData.metaTitle = this.pluggable._applyModifications( "data_page_title", this.rawData.metaTitle );
-        this.rawData.meta = this.pluggable._applyModifications( "data_meta_desc", this.rawData.meta );
-    }
+  if (this.pluggable.loaded) {
+    this.rawData.metaTitle = this.pluggable._applyModifications("data_page_title", this.rawData.metaTitle);
+    this.rawData.meta = this.pluggable._applyModifications("data_meta_desc", this.rawData.meta);
+  }
 
-    this.rawData.titleWidth = measureTextWidth( this.rawData.metaTitle );
+  this.rawData.titleWidth = measureTextWidth(this.rawData.metaTitle);
 
-    this.rawData.locale = this.config.locale;
+  this.rawData.locale = this.config.locale;
 };
 
 /**
@@ -532,13 +543,13 @@ App.prototype.getData = function() {
  *
  * @returns {void}
  */
-App.prototype.refresh = function() {
-    // Until all plugins are loaded, do not trigger a refresh.
-    if ( ! this.pluggable.loaded ) {
-        return;
-    }
+App.prototype.refresh = function () {
+  // Until all plugins are loaded, do not trigger a refresh.
+  if (!this.pluggable.loaded) {
+    return;
+  }
 
-    this._pureRefresh();
+  this._pureRefresh();
 };
 
 /**
@@ -548,9 +559,9 @@ App.prototype.refresh = function() {
  *
  * @private
  */
-App.prototype._pureRefresh = function() {
-    this.getData();
-    this.runAnalyzer();
+App.prototype._pureRefresh = function () {
+  this.getData();
+  this.runAnalyzer();
 };
 
 /**
@@ -558,8 +569,8 @@ App.prototype._pureRefresh = function() {
  *
  * @returns {boolean} Whether or not this app has a snippet preview.
  */
-App.prototype.hasSnippetPreview = function() {
-    return this.snippetPreview !== null && ! isUndefined( this.snippetPreview );
+App.prototype.hasSnippetPreview = function () {
+  return this.snippetPreview !== null && !isUndefined(this.snippetPreview);
 };
 
 /**
@@ -567,13 +578,13 @@ App.prototype.hasSnippetPreview = function() {
  *
  * @returns {void}
  */
-App.prototype.initSnippetPreview = function() {
-    if ( this.hasSnippetPreview() ) {
-        this.snippetPreview.renderTemplate();
-        this.snippetPreview.callRegisteredEventBinder();
-        this.snippetPreview.bindEvents();
-        this.snippetPreview.init();
-    }
+App.prototype.initSnippetPreview = function () {
+  if (this.hasSnippetPreview()) {
+    this.snippetPreview.renderTemplate();
+    this.snippetPreview.callRegisteredEventBinder();
+    this.snippetPreview.bindEvents();
+    this.snippetPreview.init();
+  }
 };
 
 /**
@@ -581,28 +592,28 @@ App.prototype.initSnippetPreview = function() {
  *
  * @returns {void}
  */
-App.prototype.initAssessorPresenters = function() {
-    // Pass the assessor result through to the formatter
-    if ( ! isUndefined( this.config.targets.output ) ) {
-        this.seoAssessorPresenter = new AssessorPresenter( {
-            targets: {
-                output: this.config.targets.output,
-            },
-            assessor: this.seoAssessor,
-            i18n: this.i18n,
-        } );
-    }
+App.prototype.initAssessorPresenters = function () {
+  // Pass the assessor result through to the formatter
+  if (!isUndefined(this.config.targets.output)) {
+    this.seoAssessorPresenter = new AssessorPresenter({
+      targets: {
+        output: this.config.targets.output,
+      },
+      assessor: this.seoAssessor,
+      i18n: this.i18n,
+    });
+  }
 
-    if ( ! isUndefined( this.config.targets.contentOutput ) ) {
-        // Pass the assessor result through to the formatter
-        this.contentAssessorPresenter = new AssessorPresenter( {
-            targets: {
-                output: this.config.targets.contentOutput,
-            },
-            assessor: this.contentAssessor,
-            i18n: this.i18n,
-        } );
-    }
+  if (!isUndefined(this.config.targets.contentOutput)) {
+    // Pass the assessor result through to the formatter
+    this.contentAssessorPresenter = new AssessorPresenter({
+      targets: {
+        output: this.config.targets.contentOutput,
+      },
+      assessor: this.contentAssessor,
+      i18n: this.i18n,
+    });
+  }
 };
 
 /**
@@ -610,11 +621,11 @@ App.prototype.initAssessorPresenters = function() {
  *
  * @returns {void}
  */
-App.prototype.bindInputEvent = function() {
-    for ( var i = 0; i < this.config.elementTarget.length; i++ ) {
-        var elem = document.getElementById( this.config.elementTarget[ i ] );
-        elem.addEventListener( "input", this.refresh.bind( this ) );
-    }
+App.prototype.bindInputEvent = function () {
+  for (var i = 0; i < this.config.elementTarget.length; i++) {
+    var elem = document.getElementById(this.config.elementTarget[i]);
+    elem.addEventListener("input", this.refresh.bind(this));
+  }
 };
 
 /**
@@ -622,10 +633,10 @@ App.prototype.bindInputEvent = function() {
  *
  * @returns {void}
  */
-App.prototype.reloadSnippetText = function() {
-    if ( this.hasSnippetPreview() ) {
-        this.snippetPreview.reRender();
-    }
+App.prototype.reloadSnippetText = function () {
+  if (this.hasSnippetPreview()) {
+    this.snippetPreview.reRender();
+  }
 };
 
 /**
@@ -633,8 +644,8 @@ App.prototype.reloadSnippetText = function() {
  *
  * @returns {void}
  */
-App.prototype.startTime = function() {
-    this.startTimestamp = new Date().getTime();
+App.prototype.startTime = function () {
+  this.startTimestamp = new Date().getTime();
 };
 
 /**
@@ -642,13 +653,13 @@ App.prototype.startTime = function() {
  *
  * @returns {void}
  */
-App.prototype.endTime = function() {
-    this.endTimestamp = new Date().getTime();
-    if ( this.endTimestamp - this.startTimestamp > this.config.typeDelay ) {
-        if ( this.config.typeDelay < ( this.config.maxTypeDelay - this.config.typeDelayStep ) ) {
-            this.config.typeDelay += this.config.typeDelayStep;
-        }
+App.prototype.endTime = function () {
+  this.endTimestamp = new Date().getTime();
+  if (this.endTimestamp - this.startTimestamp > this.config.typeDelay) {
+    if (this.config.typeDelay < (this.config.maxTypeDelay - this.config.typeDelayStep)) {
+      this.config.typeDelay += this.config.typeDelayStep;
     }
+  }
 };
 
 /**
@@ -657,63 +668,63 @@ App.prototype.endTime = function() {
  *
  * @returns {void}
  */
-App.prototype.runAnalyzer = function() {
-    if ( this.pluggable.loaded === false ) {
-        return;
-    }
+App.prototype.runAnalyzer = function () {
+  if (this.pluggable.loaded === false) {
+    return;
+  }
 
-    if ( this.config.dynamicDelay ) {
-        this.startTime();
-    }
+  if (this.config.dynamicDelay) {
+    this.startTime();
+  }
 
-    this.analyzerData = this.modifyData( this.rawData );
+  this.analyzerData = this.modifyData(this.rawData);
 
-    if ( this.hasSnippetPreview() ) {
-        this.snippetPreview.refresh();
-    }
+  if (this.hasSnippetPreview()) {
+    this.snippetPreview.refresh();
+  }
 
-    let text = this.analyzerData.text;
+  let text = this.analyzerData.text;
 
-    // Insert HTML stripping code
-    text = removeHtmlBlocks( text );
+  // Insert HTML stripping code
+  text = removeHtmlBlocks(text);
 
-    let titleWidth = this.analyzerData.titleWidth;
-    if ( this.hasSnippetPreview() ) {
-        titleWidth = this.snippetPreview.getTitleWidth();
-    }
+  let titleWidth = this.analyzerData.titleWidth;
+  if (this.hasSnippetPreview()) {
+    titleWidth = this.snippetPreview.getTitleWidth();
+  }
 
-    // Create a paper object for the Researcher
-    this.paper = new Paper( text, {
-        keyword: this.analyzerData.keyword,
-        synonyms: this.analyzerData.synonyms,
-        description: this.analyzerData.meta,
-        url: this.analyzerData.url,
-        title: this.analyzerData.metaTitle,
-        titleWidth: titleWidth,
-        locale: this.config.locale,
-        permalink: this.analyzerData.permalink,
-    } );
+  // Create a paper object for the Researcher
+  this.paper = new Paper(text, {
+    keyword: this.analyzerData.keyword,
+    synonyms: this.analyzerData.synonyms,
+    description: this.analyzerData.meta,
+    url: this.analyzerData.url,
+    title: this.analyzerData.metaTitle,
+    titleWidth: titleWidth,
+    locale: this.config.locale,
+    permalink: this.analyzerData.permalink,
+  });
 
-    // The new researcher
-    if ( isUndefined( this.researcher ) ) {
-        this.researcher = new Researcher( this.paper );
-    } else {
-        this.researcher.setPaper( this.paper );
-    }
+  // The new researcher
+  if (isUndefined(this.researcher)) {
+    this.researcher = new Researcher(this.paper);
+  } else {
+    this.researcher.setPaper(this.paper);
+  }
 
-    this.runKeywordAnalysis();
+  this.runKeywordAnalysis();
 
-    this.runContentAnalysis();
+  this.runContentAnalysis();
 
-    this._renderAnalysisResults();
+  this._renderAnalysisResults();
 
-    if ( this.config.dynamicDelay ) {
-        this.endTime();
-    }
+  if (this.config.dynamicDelay) {
+    this.endTime();
+  }
 
-    if ( this.hasSnippetPreview() ) {
-        this.snippetPreview.reRender();
-    }
+  if (this.hasSnippetPreview()) {
+    this.snippetPreview.reRender();
+  }
 };
 
 /**
@@ -721,19 +732,19 @@ App.prototype.runAnalyzer = function() {
  *
  * @returns {void}
  */
-App.prototype.runKeywordAnalysis = function() {
-    if ( this.config.keywordAnalysisActive ) {
-        this.seoAssessor.assess( this.paper );
-        const overallSeoScore = this.seoAssessor.calculateOverallScore();
+App.prototype.runKeywordAnalysis = function () {
+  if (this.config.keywordAnalysisActive) {
+    this.seoAssessor.assess(this.paper);
+    const overallSeoScore = this.seoAssessor.calculateOverallScore();
 
-        if ( ! isUndefined( this.callbacks.updatedKeywordsResults ) ) {
-            this.callbacks.updatedKeywordsResults( this.seoAssessor.results, overallSeoScore );
-        }
-
-        if ( ! isUndefined( this.callbacks.saveScores ) ) {
-            this.callbacks.saveScores( overallSeoScore, this.seoAssessorPresenter );
-        }
+    if (!isUndefined(this.callbacks.updatedKeywordsResults)) {
+      this.callbacks.updatedKeywordsResults(this.seoAssessor.results, overallSeoScore);
     }
+
+    if (!isUndefined(this.callbacks.saveScores)) {
+      this.callbacks.saveScores(overallSeoScore, this.seoAssessorPresenter);
+    }
+  }
 };
 
 /**
@@ -741,19 +752,19 @@ App.prototype.runKeywordAnalysis = function() {
  *
  * @returns {void}
  */
-App.prototype.runContentAnalysis = function() {
-    if ( this.config.contentAnalysisActive ) {
-        this.contentAssessor.assess( this.paper );
-        const overallContentScore = this.contentAssessor.calculateOverallScore();
+App.prototype.runContentAnalysis = function () {
+  if (this.config.contentAnalysisActive) {
+    this.contentAssessor.assess(this.paper);
+    const overallContentScore = this.contentAssessor.calculateOverallScore();
 
-        if ( ! isUndefined( this.callbacks.updatedContentResults ) ) {
-            this.callbacks.updatedContentResults( this.contentAssessor.results, overallContentScore );
-        }
-
-        if ( ! isUndefined( this.callbacks.saveContentScore ) ) {
-            this.callbacks.saveContentScore( overallContentScore, this.contentAssessorPresenter );
-        }
+    if (!isUndefined(this.callbacks.updatedContentResults)) {
+      this.callbacks.updatedContentResults(this.contentAssessor.results, overallContentScore);
     }
+
+    if (!isUndefined(this.callbacks.saveContentScore)) {
+      this.callbacks.saveContentScore(overallContentScore, this.contentAssessorPresenter);
+    }
+  }
 };
 
 /**
@@ -762,14 +773,14 @@ App.prototype.runContentAnalysis = function() {
  * @param   {Object}  data      The data to be modified.
  * @returns {Object}            The data with the applied modifications.
  */
-App.prototype.modifyData = function( data ) {
-    // Copy rawdata to lose object reference.
-    data = JSON.parse( JSON.stringify( data ) );
+App.prototype.modifyData = function (data) {
+  // Copy rawdata to lose object reference.
+  data = JSON.parse(JSON.stringify(data));
 
-    data.text      = this.pluggable._applyModifications( "content", data.text );
-    data.metaTitle = this.pluggable._applyModifications( "title", data.metaTitle );
+  data.text = this.pluggable._applyModifications("content", data.text);
+  data.metaTitle = this.pluggable._applyModifications("title", data.metaTitle);
 
-    return data;
+  return data;
 };
 
 /**
@@ -777,9 +788,9 @@ App.prototype.modifyData = function( data ) {
  *
  * @returns {void}
  */
-App.prototype.pluginsLoaded = function() {
-    this.removeLoadingDialog();
-    this.refresh();
+App.prototype.pluginsLoaded = function () {
+  this.removeLoadingDialog();
+  this.refresh();
 };
 
 /**
@@ -787,15 +798,15 @@ App.prototype.pluginsLoaded = function() {
  *
  * @returns {void}
  */
-App.prototype.showLoadingDialog = function() {
-    var outputElement = document.getElementById( this.defaultOutputElement );
+App.prototype.showLoadingDialog = function () {
+  var outputElement = document.getElementById(this.defaultOutputElement);
 
-    if ( this.defaultOutputElement !== "" && ! isEmpty( outputElement ) ) {
-        var dialogDiv = document.createElement( "div" );
-        dialogDiv.className = "YoastSEO_msg";
-        dialogDiv.id = "YoastSEO-plugin-loading";
-        document.getElementById( this.defaultOutputElement ).appendChild( dialogDiv );
-    }
+  if (this.defaultOutputElement !== "" && !isEmpty(outputElement)) {
+    var dialogDiv = document.createElement("div");
+    dialogDiv.className = "YoastSEO_msg";
+    dialogDiv.id = "YoastSEO-plugin-loading";
+    document.getElementById(this.defaultOutputElement).appendChild(dialogDiv);
+  }
 };
 
 /**
@@ -804,22 +815,22 @@ App.prototype.showLoadingDialog = function() {
  * @param   {Object}  plugins   The plugins to be parsed into the dialog.
  * @returns {void}
  */
-App.prototype.updateLoadingDialog = function( plugins ) {
-    var outputElement = document.getElementById( this.defaultOutputElement );
+App.prototype.updateLoadingDialog = function (plugins) {
+  var outputElement = document.getElementById(this.defaultOutputElement);
 
-    if ( this.defaultOutputElement === "" || isEmpty( outputElement ) ) {
-        return;
-    }
+  if (this.defaultOutputElement === "" || isEmpty(outputElement)) {
+    return;
+  }
 
-    var dialog = document.getElementById( "YoastSEO-plugin-loading" );
-    dialog.textContent = "";
+  var dialog = document.getElementById("YoastSEO-plugin-loading");
+  dialog.textContent = "";
 
-    forEach( plugins, function( plugin, pluginName ) {
-        dialog.innerHTML += "<span class=left>" + pluginName + "</span><span class=right " +
-            plugin.status + ">" + plugin.status + "</span><br />";
-    } );
+  forEach(plugins, function (plugin, pluginName) {
+    dialog.innerHTML += "<span class=left>" + pluginName + "</span><span class=right " +
+      plugin.status + ">" + plugin.status + "</span><br />";
+  });
 
-    dialog.innerHTML += "<span class=bufferbar></span>";
+  dialog.innerHTML += "<span class=bufferbar></span>";
 };
 
 /**
@@ -827,13 +838,13 @@ App.prototype.updateLoadingDialog = function( plugins ) {
  *
  * @returns {void}
  */
-App.prototype.removeLoadingDialog = function() {
-    var outputElement = document.getElementById( this.defaultOutputElement );
-    var loadingDialog = document.getElementById( "YoastSEO-plugin-loading" );
+App.prototype.removeLoadingDialog = function () {
+  var outputElement = document.getElementById(this.defaultOutputElement);
+  var loadingDialog = document.getElementById("YoastSEO-plugin-loading");
 
-    if ( ( this.defaultOutputElement !== "" && ! isEmpty( outputElement ) ) && ! isEmpty( loadingDialog ) ) {
-        document.getElementById( this.defaultOutputElement ).removeChild( document.getElementById( "YoastSEO-plugin-loading" ) );
-    }
+  if ((this.defaultOutputElement !== "" && !isEmpty(outputElement)) && !isEmpty(loadingDialog)) {
+    document.getElementById(this.defaultOutputElement).removeChild(document.getElementById("YoastSEO-plugin-loading"));
+  }
 };
 
 // ***** PLUGGABLE PUBLIC DSL ***** //
@@ -846,8 +857,8 @@ App.prototype.removeLoadingDialog = function() {
  * @param {string}  options.status  The status of the plugin being registered. Can either be "loading" or "ready".
  * @returns {boolean}               Whether or not it was successfully registered.
  */
-App.prototype.registerPlugin = function( pluginName, options ) {
-    return this.pluggable._registerPlugin( pluginName, options );
+App.prototype.registerPlugin = function (pluginName, options) {
+  return this.pluggable._registerPlugin(pluginName, options);
 };
 
 /**
@@ -856,8 +867,8 @@ App.prototype.registerPlugin = function( pluginName, options ) {
  * @param {string}  pluginName  The name of the plugin to check.
  * @returns {boolean}           Whether or not the plugin is ready.
  */
-App.prototype.pluginReady = function( pluginName ) {
-    return this.pluggable._ready( pluginName );
+App.prototype.pluginReady = function (pluginName) {
+  return this.pluggable._ready(pluginName);
 };
 
 /**
@@ -866,8 +877,8 @@ App.prototype.pluginReady = function( pluginName ) {
  * @param {string} pluginName   The name of the plugin to reload
  * @returns {boolean}           Whether or not the plugin was reloaded.
  */
-App.prototype.pluginReloaded = function( pluginName ) {
-    return this.pluggable._reloaded( pluginName );
+App.prototype.pluginReloaded = function (pluginName) {
+  return this.pluggable._reloaded(pluginName);
 };
 
 /**
@@ -881,8 +892,8 @@ App.prototype.pluginReloaded = function( pluginName ) {
  *
  * @returns {boolean} Whether or not the modification was successfully registered.
  */
-App.prototype.registerModification = function( modification, callable, pluginName, priority ) {
-    return this.pluggable._registerModification( modification, callable, pluginName, priority );
+App.prototype.registerModification = function (modification, callable, pluginName, priority) {
+  return this.pluggable._registerModification(modification, callable, pluginName, priority);
 };
 
 /**
@@ -899,11 +910,11 @@ App.prototype.registerModification = function( modification, callable, pluginNam
  * @param {string}   pluginName The plugin that is registering the test.
  * @returns {boolean} Whether or not the test was successfully registered.
  */
-App.prototype.registerAssessment = function( name, assessment, pluginName ) {
-    if ( ! isUndefined( this.seoAssessor ) ) {
-        return this.pluggable._registerAssessment( this.defaultSeoAssessor, name, assessment, pluginName ) &&
-            this.pluggable._registerAssessment( this.cornerStoneSeoAssessor, name, assessment, pluginName );
-    }
+App.prototype.registerAssessment = function (name, assessment, pluginName) {
+  if (!isUndefined(this.seoAssessor)) {
+    return this.pluggable._registerAssessment(this.defaultSeoAssessor, name, assessment, pluginName) &&
+      this.pluggable._registerAssessment(this.cornerStoneSeoAssessor, name, assessment, pluginName);
+  }
 };
 
 /**
@@ -911,14 +922,14 @@ App.prototype.registerAssessment = function( name, assessment, pluginName ) {
  *
  * @returns {void}
  */
-App.prototype.disableMarkers = function() {
-    if ( ! isUndefined( this.seoAssessorPresenter ) ) {
-        this.seoAssessorPresenter.disableMarker();
-    }
+App.prototype.disableMarkers = function () {
+  if (!isUndefined(this.seoAssessorPresenter)) {
+    this.seoAssessorPresenter.disableMarker();
+  }
 
-    if ( ! isUndefined( this.contentAssessorPresenter ) ) {
-        this.contentAssessorPresenter.disableMarker();
-    }
+  if (!isUndefined(this.contentAssessorPresenter)) {
+    this.contentAssessorPresenter.disableMarker();
+  }
 };
 
 /**
@@ -926,14 +937,14 @@ App.prototype.disableMarkers = function() {
  *
  * @returns {void}
  */
-App.prototype._renderAnalysisResults = function() {
-    if ( this.config.contentAnalysisActive && ! isUndefined( this.contentAssessorPresenter ) ) {
-        this.contentAssessorPresenter.renderIndividualRatings();
-    }
-    if ( this.config.keywordAnalysisActive && ! isUndefined( this.seoAssessorPresenter ) ) {
-        this.seoAssessorPresenter.setKeyword( this.paper.getKeyword() );
-        this.seoAssessorPresenter.render();
-    }
+App.prototype._renderAnalysisResults = function () {
+  if (this.config.contentAnalysisActive && !isUndefined(this.contentAssessorPresenter)) {
+    this.contentAssessorPresenter.renderIndividualRatings();
+  }
+  if (this.config.keywordAnalysisActive && !isUndefined(this.seoAssessorPresenter)) {
+    this.seoAssessorPresenter.setKeyword(this.paper.getKeyword());
+    this.seoAssessorPresenter.render();
+  }
 };
 
 // Deprecated functions
@@ -946,8 +957,8 @@ App.prototype._renderAnalysisResults = function() {
  *
  * @returns {void}
  */
-App.prototype.analyzeTimer = function() {
-    this.refresh();
+App.prototype.analyzeTimer = function () {
+  this.refresh();
 };
 
 /**
@@ -966,8 +977,8 @@ App.prototype.analyzeTimer = function() {
  *
  * @deprecated since version 1.2
  */
-App.prototype.registerTest = function() {
-    console.error( "This function is deprecated, please use registerAssessment" );
+App.prototype.registerTest = function () {
+  console.error("This function is deprecated, please use registerAssessment");
 };
 
 /**
@@ -978,9 +989,9 @@ App.prototype.registerTest = function() {
  *
  * @returns {void}
  */
-App.prototype.createSnippetPreview = function() {
-    this.snippetPreview = createDefaultSnippetPreview.call( this );
-    this.initSnippetPreview();
+App.prototype.createSnippetPreview = function () {
+  this.snippetPreview = createDefaultSnippetPreview.call(this);
+  this.initSnippetPreview();
 };
 
 /**
@@ -992,13 +1003,13 @@ App.prototype.createSnippetPreview = function() {
  *
  * @returns {void}
  */
-App.prototype.switchAssessors = function( useCornerStone ) {
-    // eslint-disable-next-line no-console
-    console.warn( "Switch assessor is deprecated since YoastSEO.js version 1.35.0" );
+App.prototype.switchAssessors = function (useCornerStone) {
+  // eslint-disable-next-line no-console
+  console.warn("Switch assessor is deprecated since YoastSEO.js version 1.35.0");
 
-    this.changeAssessorOptions( {
-        useCornerStone,
-    } );
+  this.changeAssessorOptions({
+    useCornerStone,
+  });
 };
 
 export default App;
