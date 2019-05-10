@@ -28,7 +28,6 @@ import { measureTextWidth } from "yoastseo/src/helpers/createMeasurementElement.
 import {sprintf} from "./helpers/sprintf";
 
 import removeHtmlBlocks from "yoastseo/src/stringProcessing/htmlParser.js";
-import charCountIntText from "./researches/charCountIntText";
 import Researcher from "./researcher";
 
 const keyphraseDistribution = new KeyphraseDistributionAssessment();

@@ -20,7 +20,7 @@ export default class CharLengthAssessment extends Assessment {
 
         const defaultConfig = {
             recommendedMinimum: 3000,
-            slightlyBelowMinimum: 250,
+            slightlyBelowMinimum: 2800,
             belowMinimum: 200,
             veryFarBelowMinimum: 100,
 
@@ -31,8 +31,8 @@ export default class CharLengthAssessment extends Assessment {
                 farBelowMinimum: -10,
                 veryFarBelowMinimum: -20,
             },
-            urlTitle: createAnchorOpeningTag( "https://yoa.st/34n" ),
-            urlCallToAction: createAnchorOpeningTag( "https://yoa.st/34o" ),
+           // urlTitle: createAnchorOpeningTag( "https://yoa.st/34n" ),
+           // urlCallToAction: createAnchorOpeningTag( "https://yoa.st/34o" ),
 
             cornerstoneContent: false,
         };
@@ -77,13 +77,11 @@ export default class CharLengthAssessment extends Assessment {
                     i18n.dngettext(
                         "js-text-analysis",
                         /* Translators: %1$d expands to the number of words in the text,
-                        %2$s expands to a link on yoast.com, %3$s expands to the anchor end tag */
-                        "%2$sText length%3$s: The text contains %1$d chars. Good job!",
-                        "%2$sText length%3$s: The text contains %1$d chars. Good job!",
+                         expands to a link on yoast.com,  expands to the anchor end tag */
+                        "Text length: The text contains %1$d chars. Good job!",
+                        "Text length: The text contains %1$d chars. Good job!",
                         charCount ),
                     charCount,
-                    this._config.urlTitle,
-                    "</a>",
                 ),
             };
         }
@@ -101,24 +99,21 @@ export default class CharLengthAssessment extends Assessment {
                     i18n.dngettext(
                         "js-text-analysis",
                         /* Translators: %1$d expands to the number of words in the text,
-                        %2$s expands to a link on yoast.com, %4$s expands to the anchor end tag. */
-                        "%2$sText length%4$s: The text contains %1$d word.",
-                        "%2$sText length%4$s: The text contains %1$d words.",
+                         expands to a link on yoast.com,  expands to the anchor end tag. */
+                        "Text length: The text contains %1$d char.",
+                        "Text length: The text contains %1$d chars.",
                         charCount
                     ) + " " + i18n.dngettext(
                     "js-text-analysis",
                     /* Translators: The preceding sentence is "Text length: The text contains x words.",
-                    %3$s expands to a link on yoast.com,
-                    %4$s expands to the anchor end tag,
-                    %5$d expands to the recommended minimum of words. */
-                    "This is far below the recommended minimum of %5$d word. %3$sAdd more content%4$s.",
-                    "This is far below the recommended minimum of %5$d words. %3$sAdd more content%4$s.",
+                     expands to a link on yoast.com,
+                     expands to the anchor end tag,
+                    %2$d expands to the recommended minimum of words. */
+                    "This is far below the recommended minimum of %2$d char. Add more content.",
+                    "This is far below the recommended minimum of %2$d chars. Add more content.",
                     this._config.recommendedMinimum
                     ),
                     charCount,
-                    this._config.urlTitle,
-                    this._config.urlCallToAction,
-                    "</a>",
                     this._config.recommendedMinimum
                 ),
             };
@@ -132,24 +127,21 @@ export default class CharLengthAssessment extends Assessment {
                         i18n.dngettext(
                             "js-text-analysis",
                             /* Translators: %1$d expands to the number of words in the text,
-                            %2$s expands to a link on yoast.com, %4$s expands to the anchor end tag. */
-                            "%2$sText length%4$s: The text contains %1$d word.",
-                            "%2$sText length%4$s: The text contains %1$d words.",
+                             expands to a link on yoast.com,  expands to the anchor end tag. */
+                            "Text length: The text contains %1$d char.",
+                            "Text length: The text contains %1$d chars.",
                             charCount
                         ) + " " + i18n.dngettext(
                         "js-text-analysis",
                         /* Translators: The preceding sentence is "Text length: The text contains x words.",
-                        %3$s expands to a link on yoast.com,
-                        %4$s expands to the anchor end tag,
-                        %5$d expands to the recommended minimum of words. */
-                        "This is slightly below the recommended minimum of %5$d word. %3$sAdd a bit more copy%4$s.",
-                        "This is slightly below the recommended minimum of %5$d words. %3$sAdd a bit more copy%4$s.",
+                         expands to a link on yoast.com,
+                         expands to the anchor end tag,
+                        %2$d expands to the recommended minimum of words. */
+                        "This is slightly below the recommended minimum of %2$d char. Add a bit more copy.",
+                        "This is slightly below the recommended minimum of %2$d chars. Add a bit more copy.",
                         this._config.recommendedMinimum
                         ),
                         charCount,
-                        this._config.urlTitle,
-                        this._config.urlCallToAction,
-                        "</a>",
                         this._config.recommendedMinimum
                     ),
                 };
@@ -161,24 +153,21 @@ export default class CharLengthAssessment extends Assessment {
                     i18n.dngettext(
                         "js-text-analysis",
                         /* Translators: %1$d expands to the number of words in the text,
-                        %2$s expands to a link on yoast.com, %4$s expands to the anchor end tag. */
-                        "%2$sText length%4$s: The text contains %1$d word.",
-                        "%2$sText length%4$s: The text contains %1$d words.",
+                         expands to a link on yoast.com,  expands to the anchor end tag. */
+                        "Text length: The text contains %1$d char.",
+                        "Text length: The text contains %1$d chars.",
                         charCount
                     ) + " " + i18n.dngettext(
                     "js-text-analysis",
                     /* Translators: The preceding sentence is "Text length: The text contains x words.",
-                    %3$s expands to a link on yoast.com,
-                    %4$s expands to the anchor end tag,
-                    %5$d expands to the recommended minimum of words. */
-                    "This is below the recommended minimum of %5$d word. %3$sAdd more content%4$s.",
-                    "This is below the recommended minimum of %5$d words. %3$sAdd more content%4$s.",
+                     expands to a link on yoast.com,
+                     expands to the anchor end tag,
+                    %2$d expands to the recommended minimum of words. */
+                    "This is below the recommended minimum of %3$d char. Add more content.",
+                    "This is below the recommended minimum of %3$d chars. Add more content.",
                     this._config.recommendedMinimum
                     ),
                     charCount,
-                    this._config.urlTitle,
-                    this._config.urlCallToAction,
-                    "</a>",
                     this._config.recommendedMinimum
                 ),
             };
@@ -190,24 +179,21 @@ export default class CharLengthAssessment extends Assessment {
                 i18n.dngettext(
                     "js-text-analysis",
                     /* Translators: %1$d expands to the number of words in the text,
-                    %2$s expands to a link on yoast.com, %4$s expands to the anchor end tag. */
-                    "%2$sText length%4$s: The text contains %1$d word.",
-                    "%2$sText length%4$s: The text contains %1$d words.",
+                     expands to a link on yoast.com,  expands to the anchor end tag. */
+                    "Text length: The text contains %1$d char.",
+                    "Text length: The text contains %1$d chars.",
                     charCount
                 ) + " " + i18n.dngettext(
                 "js-text-analysis",
                 /* Translators: The preceding sentence is "Text length: The text contains x words.",
-                %3$s expands to a link on yoast.com,
-                %4$s expands to the anchor end tag,
-                %5$d expands to the recommended minimum of words. */
-                "This is below the recommended minimum of %5$d word. %3$sAdd more content%4$s.",
-                "This is below the recommended minimum of %5$d words. %3$sAdd more content%4$s.",
+                 expands to a link on yoast.com,
+                 expands to the anchor end tag,
+                %2$d expands to the recommended minimum of words. */
+                "This is below the recommended minimum of %2$d char. Add more content.",
+                "This is below the recommended minimum of %2$d chars. Add more content.",
                 this._config.recommendedMinimum
                 ),
-                wordCount,
-                this._config.urlTitle,
-                this._config.urlCallToAction,
-                "</a>",
+                charCount,
                 this._config.recommendedMinimum
             ),
         };
