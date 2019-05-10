@@ -1,4 +1,4 @@
-import Assessor from "../src/assessor2.js";
+import Assessor from "../src/assessor.js";
 import Paper from "yoastseo/src/values/Paper.js";
 import AssessmentResult from "yoastseo/src/values/AssessmentResult.js";
 import MissingArgument from "yoastseo/src/errors/missingArgument";

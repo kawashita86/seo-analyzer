@@ -6,7 +6,7 @@ import TextCompetingLinksAssessment from "yoastseo/src/assessments/seo/TextCompe
 import InternalLinksAssessment from "yoastseo/src/assessments/seo/InternalLinksAssessment";
 import TitleKeywordAssessment from "yoastseo/src/assessments/seo/TitleKeywordAssessment";
 //import UrlKeywordAssessment from "yoastseo/src/assessments/seo/UrlKeywordAssessment";
-import Assessor from "./assessor2";
+import Assessor from "./assessor";
 //import MetaDescriptionLength from "yoastseo/src/assessments/seo/MetaDescriptionLengthAssessment";
 import SubheadingsKeyword from "yoastseo/src/assessments/seo/SubHeadingsKeywordAssessment";
 import TextImages from "yoastseo/src/assessments/seo/TextImagesAssessment";

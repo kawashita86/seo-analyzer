@@ -1,4 +1,4 @@
-import Assessor from "./assessor2.js";
+import Assessor from "./assessor.js";
 
 /*
 	Temporarily disabled:
