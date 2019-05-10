@@ -18,9 +18,6 @@ import Assessor from "./assessor2.js";
 
 import scoreToRating from "yoastseo/src/interpreters/scoreToRating";
 
-import { map } from "lodash-es";
-import { sum } from "lodash-es";
-
 /**
  * Creates the Assessor
  *
@@ -31,152 +28,113 @@ import { sum } from "lodash-es";
  *
  * @constructor
  */
-const ContentAssessor = function( i18n, options = {} ) {
-    Assessor.call( this, i18n, options );
+export default class ContentAssessor extends Assessor {
+  constructor(i18n, options = {}) {
+    super(i18n, options);
     this.type = "ContentAssessor";
-    const locale = ( options.hasOwnProperty( "locale" ) ) ? options.locale : "en_US";
+    this.locale = (options.hasOwnProperty("locale")) ? options.locale : "en_US";
 
-    this._assessments = [
-
-        //new FleschReadingEase( contentConfiguration( locale ).fleschReading ),
-        //new SubheadingDistributionTooLong(),
-        //paragraphTooLong,
-        //new SentenceLengthInText( contentConfiguration( locale ).sentenceLength ),
-        //transitionWords,
-        //passiveVoice,
-        //textPresence,
-        //sentenceBeginnings,
-        // Temporarily disabled: wordComplexity,
+    this.assessments = [
+      //new FleschReadingEase( contentConfiguration( locale ).fleschReading ),
+      //new SubheadingDistributionTooLong(),
+      //paragraphTooLong,
+      //new SentenceLengthInText( contentConfiguration( locale ).sentenceLength ),
+      //transitionWords,
+      //passiveVoice,
+      //textPresence,
+      //sentenceBeginnings,
+      // Temporarily disabled: wordComplexity,
     ];
-};
+  }
 
-require( "util" ).inherits( ContentAssessor, Assessor );
-
-/**
- * Calculates the weighted rating for languages that have all assessments based on a given rating.
- *
- * @param {number} rating The rating to be weighted.
- * @returns {number} The weighted rating.
- */
-ContentAssessor.prototype.calculatePenaltyPointsFullSupport = function( rating ) {
-    switch ( rating ) {
-        case "bad":
-            return 3;
-        case "ok":
-            return 2;
-        default:
-        case "good":
-            return 0;
+  static calculatePenaltyPointsFullSupport(rating) {
+    switch (rating) {
+      case "bad":
+        return 3;
+      case "ok":
+        return 2;
+      default:
+      case "good":
+        return 0;
     }
-};
+  }
 
-/**
- * Calculates the weighted rating for languages that don't have all assessments based on a given rating.
- *
- * @param {number} rating The rating to be weighted.
- * @returns {number} The weighted rating.
- */
-ContentAssessor.prototype.calculatePenaltyPointsPartialSupport = function( rating ) {
-    switch ( rating ) {
-        case "bad":
-            return 4;
-        case "ok":
-            return 2;
-        default:
-        case "good":
-            return 0;
+  static calculatePenaltyPointsPartialSupport(rating) {
+    switch (rating) {
+      case "bad":
+        return 4;
+      case "ok":
+        return 2;
+      default:
+      case "good":
+        return 0;
     }
-};
+  }
 
-/**
- * Determines whether a language is fully supported. If a language supports 8 content assessments
- * it is fully supported
- *
- * @returns {boolean} True if fully supported.
- */
-ContentAssessor.prototype._allAssessmentsSupported = function() {
+  allAssessmentsSupported() {
     const numberOfAssessments = 8;
     const applicableAssessments = this.getApplicableAssessments();
     return applicableAssessments.length === numberOfAssessments;
-};
+  };
 
-/**
- * Calculates the penalty points based on the assessment results.
- *
- * @returns {number} The total penalty points for the results.
- */
-ContentAssessor.prototype.calculatePenaltyPoints = function() {
+  calculatePenaltyPoints() {
     const results = this.getValidResults();
 
-    const penaltyPoints = map( results, function( result ) {
-        const rating = scoreToRating( result.getScore() );
+    const penaltyPoints = results.map(result => {
+      const rating = scoreToRating(result.getScore());
 
-        if ( this._allAssessmentsSupported() ) {
-            return this.calculatePenaltyPointsFullSupport( rating );
-        }
+      if (this.allAssessmentsSupported()) {
+        return ContentAssessor.calculatePenaltyPointsFullSupport(rating);
+      }
 
-        return this.calculatePenaltyPointsPartialSupport( rating );
-    }.bind( this ) );
+      return ContentAssessor.calculatePenaltyPointsPartialSupport(rating);
+    });
 
-    return sum( penaltyPoints );
-};
+    return penaltyPoints.reduce((acc, n) => acc + n);
+  }
 
-/**
- * Rates the penalty points
- *
- * @param {number} totalPenaltyPoints The amount of penalty points.
- * @returns {number} The score based on the amount of penalty points.
- *
- * @private
- */
-ContentAssessor.prototype._ratePenaltyPoints = function( totalPenaltyPoints ) {
-    if ( this.getValidResults().length === 1 ) {
-        // If we have only 1 result, we only have a "no content" result
-        return 30;
+  ratePenaltyPoints(totalPenaltyPoints) {
+    if (this.getValidResults().length === 1) {
+      // If we have only 1 result, we only have a "no content" result
+      return 30;
     }
 
-    if ( this._allAssessmentsSupported() ) {
-        // Determine the total score based on the total penalty points.
-        if ( totalPenaltyPoints > 6 ) {
-            // A red indicator.
-            return 30;
-        }
+    if (this.allAssessmentsSupported()) {
+      // Determine the total score based on the total penalty points.
+      if (totalPenaltyPoints > 6) {
+        // A red indicator.
+        return 30;
+      }
 
-        if ( totalPenaltyPoints > 4 ) {
-            // An orange indicator.
-            return 60;
-        }
+      if (totalPenaltyPoints > 4) {
+        // An orange indicator.
+        return 60;
+      }
     } else {
-        if ( totalPenaltyPoints > 4 ) {
-            // A red indicator.
-            return 30;
-        }
+      if (totalPenaltyPoints > 4) {
+        // A red indicator.
+        return 30;
+      }
 
-        if ( totalPenaltyPoints > 2 ) {
-            // An orange indicator.
-            return 60;
-        }
+      if (totalPenaltyPoints > 2) {
+        // An orange indicator.
+        return 60;
+      }
     }
     // A green indicator.
     return 90;
-};
+  }
 
-/**
- * Calculates the overall score based on the assessment results.
- *
- * @returns {number} The overall score.
- */
-ContentAssessor.prototype.calculateOverallScore = function() {
+  calculateOverallScore() {
     const results = this.getValidResults();
 
     // If you have no content, you have a red indicator.
-    if ( results.length === 0 ) {
-        return 30;
+    if (results.length === 0) {
+      return 30;
     }
 
     const totalPenaltyPoints = this.calculatePenaltyPoints();
 
-    return this._ratePenaltyPoints( totalPenaltyPoints );
-};
-
-export default ContentAssessor;
+    return this.ratePenaltyPoints(totalPenaltyPoints);
+  }
+}

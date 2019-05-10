@@ -1,5 +1,3 @@
-import { inherits } from "util";
-
 import IntroductionKeywordAssessment from "yoastseo/src/assessments/seo/IntroductionKeywordAssessment";
 //import KeyphraseLengthAssessment from "yoastseo/src/assessments/seo/KeyphraseLengthAssessment";
 import KeywordDensityAssessment from "yoastseo/src/assessments/seo/KeywordDensityAssessment";
@@ -18,6 +16,7 @@ import TitleWidth from "yoastseo/src/assessments/seo/PageTitleWidthAssessment";
 //import FunctionWordsInKeyphrase from "yoastseo/src/assessments/seo/FunctionWordsInKeyphraseAssessment";
 //import SingleH1Assessment from "yoastseo/src/assessments/seo/SingleH1Assessment";
 import CharLengthAssessment from "./assessments/seo/CharLengthAssessment";
+
 /**
  * Creates the Assessor
  *
@@ -27,31 +26,30 @@ import CharLengthAssessment from "./assessments/seo/CharLengthAssessment";
  *
  * @constructor
  */
-const SEOAssessor = function( i18n, options ) {
-    Assessor.call( this, i18n, options );
+
+export default class SEOAssessor extends Assessor {
+  constructor(i18n, options) {
+    super(i18n, options);
+
     this.type = "SEOAssessor";
-
     this._assessments = [
-        new IntroductionKeywordAssessment(),
-        //new KeyphraseLengthAssessment(),
-        new KeywordDensityAssessment(),
-        new MetaDescriptionKeywordAssessment(),
-        //new MetaDescriptionLength(),
-        new SubheadingsKeyword(),
-        new TextCompetingLinksAssessment(),
-        new TextImages(),
-        //new TextLength(),
-        //new OutboundLinks(),
-        new TitleKeywordAssessment(),
-        new InternalLinksAssessment(),
-        new TitleWidth(),
-        //new UrlKeywordAssessment(),
-        //new FunctionWordsInKeyphrase(),
-        //new SingleH1Assessment(),
-        new CharLengthAssessment()
+      new IntroductionKeywordAssessment(),
+      //new KeyphraseLengthAssessment(),
+      new KeywordDensityAssessment(),
+      new MetaDescriptionKeywordAssessment(),
+      //new MetaDescriptionLength(),
+      new SubheadingsKeyword(),
+      new TextCompetingLinksAssessment(),
+      new TextImages(),
+      //new TextLength(),
+      //new OutboundLinks(),
+      new TitleKeywordAssessment(),
+      new InternalLinksAssessment(),
+      new TitleWidth(),
+      //new UrlKeywordAssessment(),
+      //new FunctionWordsInKeyphrase(),
+      //new SingleH1Assessment(),
+      new CharLengthAssessment()
     ];
-};
-
-inherits( SEOAssessor, Assessor );
-
-export default SEOAssessor;
+  }
+}

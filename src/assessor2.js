@@ -10,6 +10,7 @@ export default class Assessor {
     this.setI18n(i18n);
     this.options = options;
     this.assessments = [];
+    this.type = "Assessor";
 
     if (this.options.hasOwnProperty('researcher')) {
       this.researcher = this.options.researcher;
