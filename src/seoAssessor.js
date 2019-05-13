@@ -9,7 +9,7 @@ import TitleKeywordAssessment from "yoastseo/src/assessments/seo/TitleKeywordAss
 import Assessor from "./assessor";
 //import MetaDescriptionLength from "yoastseo/src/assessments/seo/MetaDescriptionLengthAssessment";
 import SubheadingsKeyword from "yoastseo/src/assessments/seo/SubHeadingsKeywordAssessment";
-import TextImages from "yoastseo/src/assessments/seo/TextImagesAssessment";
+//import TextImages from "yoastseo/src/assessments/seo/TextImagesAssessment";
 //import TextLength from "yoastseo/src/assessments/seo/TextLengthAssessment";
 //import OutboundLinks from "yoastseo/src/assessments/seo/OutboundLinksAssessment";
 import TitleWidth from "yoastseo/src/assessments/seo/PageTitleWidthAssessment";
@@ -40,7 +40,7 @@ export default class SEOAssessor extends Assessor {
       //new MetaDescriptionLength(),
       new SubheadingsKeyword(),
       // new TextCompetingLinksAssessment(),
-      new TextImages(),
+      //new TextImages(),
       //new TextLength(),
       //new OutboundLinks(),
       new TitleKeywordAssessment(),

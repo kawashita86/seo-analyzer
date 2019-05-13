@@ -13,7 +13,7 @@ import wordCountInText from "yoastseo/src/researches/wordCountInText.js";
 //import getLinkStatistics from "yoastseo/src/researches/getLinkStatistics.js";
 import linkCount from "yoastseo/src/researches/countLinks.js";
 import getLinks from "yoastseo/src/researches/getLinks.js";
-import urlLength from "yoastseo/src/researches/urlIsTooLong.js";
+//import urlLength from "yoastseo/src/researches/urlIsTooLong.js";
 import findKeywordInPageTitle from "yoastseo/src/researches/findKeywordInPageTitle.js";
 import matchKeywordInSubheadings from "yoastseo/src/researches/matchKeywordInSubheadings.js";
 import getKeywordDensity from "yoastseo/src/researches/getKeywordDensity.js";
@@ -22,8 +22,8 @@ import keywordCount from "yoastseo/src/researches/keywordCount";
 //import stopWordsInUrl from "yoastseo/src/researches/stopWordsInUrl";
 //import calculateFleschReading from "yoastseo/src/researches/calculateFleschReading.js";
 import metaDescriptionLength from "yoastseo/src/researches/metaDescriptionLength.js";
-import imageCount from "yoastseo/src/researches/imageCountInText.js";
-import altTagCount from "yoastseo/src/researches/imageAltTags.js";
+//import imageCount from "yoastseo/src/researches/imageCountInText.js";
+//import altTagCount from "yoastseo/src/researches/imageAltTags.js";
 import keyphraseLength from "yoastseo/src/researches/keyphraseLength";
 import metaDescriptionKeyword from "yoastseo/src/researches/metaDescriptionKeyword.js";
 import keywordCountInUrl from "yoastseo/src/researches/keywordCountInUrl";
@@ -58,15 +58,15 @@ var Researcher = function( paper ) {
   this.setPaper( paper );
 
   this.defaultResearches = {
-    urlLength: urlLength,
+    //urlLength: urlLength,
     wordCountInText: wordCountInText,
     findKeywordInPageTitle: findKeywordInPageTitle,
     //calculateFleschReading: calculateFleschReading,
     //getLinkStatistics: getLinkStatistics,
     getLinks: getLinks,
     linkCount: linkCount,
-    imageCount: imageCount,
-    altTagCount: altTagCount,
+    //imageCount: imageCount,
+    //altTagCount: altTagCount,
     matchKeywordInSubheadings: matchKeywordInSubheadings,
     keywordCount: keywordCount,
     getKeywordDensity: getKeywordDensity,

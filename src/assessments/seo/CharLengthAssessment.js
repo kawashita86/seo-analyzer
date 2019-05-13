@@ -1,7 +1,6 @@
 import { inRange, merge } from "lodash-es";
 
 import Assessment from "../../assesment";
-import { createAnchorOpeningTag } from "yoastseo/src/helpers/shortlinker";
 import AssessmentResult from "yoastseo/src/values/AssessmentResult";
 
 /**
@@ -31,8 +30,6 @@ export default class CharLengthAssessment extends Assessment {
                 farBelowMinimum: -10,
                 veryFarBelowMinimum: -20,
             },
-           // urlTitle: createAnchorOpeningTag( "https://yoa.st/34n" ),
-           // urlCallToAction: createAnchorOpeningTag( "https://yoa.st/34o" ),
 
             cornerstoneContent: false,
         };

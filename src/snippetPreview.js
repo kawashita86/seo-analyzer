@@ -18,7 +18,7 @@ var hiddenElement = templates.hiddenSpan;
 import SnippetPreviewToggler from "yoastseo/src/snippetPreviewToggler";
 import domManipulation from "yoastseo/src/helpers/domManipulation.js";
 
-import Config from "yoastseo/src/config/config";
+import Config from "./config/config";
 
 var defaults = {
     data: {

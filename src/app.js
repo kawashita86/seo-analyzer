@@ -1,5 +1,5 @@
 import "./config/config.js";
-import SnippetPreview from "./snippetPreview.js";
+//import SnippetPreview from "./snippetPreview.js";
 //const localeConfig = require(`${LOCALE_ROOT}/config`)
 
 import {defaultsDeep} from "lodash-es";
@@ -100,7 +100,7 @@ var defaults = {
   },
   keywordAnalysisActive: true,
   contentAnalysisActive: true,
-  hasSnippetPreview: true,
+  hasSnippetPreview: false,
   debounceRefresh: true,
 };
 
@@ -112,7 +112,7 @@ var defaults = {
  *
  * @returns {SnippetPreview} The SnippetPreview object.
  */
-function createDefaultSnippetPreview() {
+/*function createDefaultSnippetPreview() {
   var targetElement = document.getElementById(this.config.targets.snippet);
 
   return new SnippetPreview({
@@ -122,7 +122,7 @@ function createDefaultSnippetPreview() {
       saveSnippetData: this.config.callbacks.saveSnippetData,
     },
   });
-}
+}*/
 
 /**
  * Returns whether or not the given argument is a valid SnippetPreview object.
@@ -130,9 +130,9 @@ function createDefaultSnippetPreview() {
  * @param   {*}         snippetPreview  The 'object' to check against.
  * @returns {boolean}                   Whether or not it's a valid SnippetPreview object.
  */
-function isValidSnippetPreview(snippetPreview) {
+/*function isValidSnippetPreview(snippetPreview) {
   return !isUndefined(snippetPreview) && SnippetPreview.prototype.isPrototypeOf(snippetPreview);
-}
+}*/
 
 /**
  * Check arguments passed to the App to check if all necessary arguments are set.
@@ -153,7 +153,7 @@ function verifyArguments(args) {
   // The args.targets.snippet argument is only required if not SnippetPreview object has been passed.
   if (
     args.hasSnippetPreview &&
-    !isValidSnippetPreview(args.snippetPreview) &&
+    //!isValidSnippetPreview(args.snippetPreview) &&
     !isString(args.targets.snippet)) {
     throw new MissingArgument("A snippet preview is required. When no SnippetPreview object isn't passed to " +
       "the App, the `targets.snippet` is a required App argument. `targets.snippet` is not a string.");
@@ -301,26 +301,23 @@ var App = function (args) {
     this.showLoadingDialog();
   }
 
-  if (isValidSnippetPreview(args.snippetPreview)) {
+  /*if (isValidSnippetPreview(args.snippetPreview)) {
     this.snippetPreview = args.snippetPreview;
 
-    /* Hack to make sure the snippet preview always has a reference to this App. This way we solve the circular
-    dependency issue. In the future this should be solved by the snippet preview not having a reference to the
-    app.*/
     if (this.snippetPreview.refObj !== this) {
       this.snippetPreview.refObj = this;
       this.snippetPreview._i18n = this.i18n;
     }
   } else if (args.hasSnippetPreview) {
     this.snippetPreview = createDefaultSnippetPreview.call(this);
-  }
+  }*/
 
   this._assessorOptions = {
     useCornerStone: false,
     useKeywordDistribution: false,
   };
 
-  this.initSnippetPreview();
+  //this.initSnippetPreview();
   this.initAssessorPresenters();
 };
 
@@ -989,10 +986,10 @@ App.prototype.registerTest = function () {
  *
  * @returns {void}
  */
-App.prototype.createSnippetPreview = function () {
+/*App.prototype.createSnippetPreview = function () {
   this.snippetPreview = createDefaultSnippetPreview.call(this);
   this.initSnippetPreview();
-};
+};*/
 
 /**
  * Switches between the cornerstone and default assessors.
