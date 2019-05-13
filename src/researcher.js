@@ -10,11 +10,12 @@ import { isEmpty } from "lodash-es";
 // Researches
 import wordCountInText from "yoastseo/src/researches/wordCountInText.js";
 
-//import getLinkStatistics from "yoastseo/src/researches/getLinkStatistics.js";
+import getLinkStatistics from "yoastseo/src/researches/getLinkStatistics.js";
 import linkCount from "yoastseo/src/researches/countLinks.js";
 import getLinks from "yoastseo/src/researches/getLinks.js";
 //import urlLength from "yoastseo/src/researches/urlIsTooLong.js";
 import findKeywordInPageTitle from "yoastseo/src/researches/findKeywordInPageTitle.js";
+// At least 1 with keyword
 import matchKeywordInSubheadings from "yoastseo/src/researches/matchKeywordInSubheadings.js";
 import getKeywordDensity from "yoastseo/src/researches/getKeywordDensity.js";
 import keywordCount from "yoastseo/src/researches/keywordCount";
@@ -47,6 +48,8 @@ import { research as morphology } from "yoastseo/src/researches/buildKeywordForm
 import functionWordsInKeyphrase from "yoastseo/src/researches/functionWordsInKeyphrase";
 import h1s from "yoastseo/src/researches/h1s";
 import charCountIntText from "./researches/charCountIntText";
+import subheadingsH2Count from "./researches/subheadingsH2Count";
+import subheadingsH2WithKeywordCount from "./researches/subheadingsH2WithKeywordCount";
 
 /**
  * This contains all possible, default researches.
@@ -95,7 +98,9 @@ var Researcher = function( paper ) {
     morphology: morphology,
     functionWordsInKeyphrase: functionWordsInKeyphrase,
     h1s: h1s,
-    charCount: charCountIntText
+    charCount: charCountIntText,
+    subheadingsH2Count,
+    subheadingsH2WithKeywordCount,
   };
 
   this._data = {};
