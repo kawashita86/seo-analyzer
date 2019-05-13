@@ -2,9 +2,9 @@ import IntroductionKeywordAssessment from "yoastseo/src/assessments/seo/Introduc
 //import KeyphraseLengthAssessment from "yoastseo/src/assessments/seo/KeyphraseLengthAssessment";
 import KeywordDensityAssessment from "yoastseo/src/assessments/seo/KeywordDensityAssessment";
 import MetaDescriptionKeywordAssessment from "yoastseo/src/assessments/seo/MetaDescriptionKeywordAssessment";
-import TextCompetingLinksAssessment from "yoastseo/src/assessments/seo/TextCompetingLinksAssessment";
-import InternalLinksAssessment from "yoastseo/src/assessments/seo/InternalLinksAssessment";
-import TitleKeywordAssessment from "yoastseo/src/assessments/seo/TitleKeywordAssessment";
+//import TextCompetingLinksAssessment from "yoastseo/src/assessments/seo/TextCompetingLinksAssessment";
+//import InternalLinksAssessment from "yoastseo/src/assessments/seo/InternalLinksAssessment";
+import TitleKeywordAssessment from "./assessments/seo/TitleKeywordAssessment";
 //import UrlKeywordAssessment from "yoastseo/src/assessments/seo/UrlKeywordAssessment";
 import Assessor from "./assessor";
 //import MetaDescriptionLength from "yoastseo/src/assessments/seo/MetaDescriptionLengthAssessment";
@@ -16,6 +16,7 @@ import TitleWidth from "yoastseo/src/assessments/seo/PageTitleWidthAssessment";
 //import FunctionWordsInKeyphrase from "yoastseo/src/assessments/seo/FunctionWordsInKeyphraseAssessment";
 //import SingleH1Assessment from "yoastseo/src/assessments/seo/SingleH1Assessment";
 import CharLengthAssessment from "./assessments/seo/CharLengthAssessment";
+import TitleKeywordPositionAssessment from "./assessments/seo/TitleKeywordPositionAssessment";
 
 /**
  * Creates the Assessor
@@ -44,6 +45,7 @@ export default class SEOAssessor extends Assessor {
       //new TextLength(),
       //new OutboundLinks(),
       new TitleKeywordAssessment(),
+      new TitleKeywordPositionAssessment(),
       // new InternalLinksAssessment(),
       new TitleWidth(),
       //new UrlKeywordAssessment(),
