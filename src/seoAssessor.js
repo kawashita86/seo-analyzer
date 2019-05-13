@@ -17,7 +17,8 @@ import TitleWidth from "yoastseo/src/assessments/seo/PageTitleWidthAssessment";
 //import SingleH1Assessment from "yoastseo/src/assessments/seo/SingleH1Assessment";
 import CharLengthAssessment from "./assessments/seo/CharLengthAssessment";
 import TitleKeywordPositionAssessment from "./assessments/seo/TitleKeywordPositionAssessment";
-import H2KeywordAssessment from "./assessments/seo/h2KeywordAssessment";
+import H2KeywordAssessment from "./assessments/seo/H2KeywordAssessment";
+import LinkWithKeywordAssessment from "./assessments/seo/LinkWithKeywordAssessment";
 
 /**
  * Creates the Assessor
@@ -54,6 +55,7 @@ export default class SEOAssessor extends Assessor {
       //new SingleH1Assessment(),
       new CharLengthAssessment(),
       new H2KeywordAssessment(),
+      new LinkWithKeywordAssessment(),
     ];
   }
 }
