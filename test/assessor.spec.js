@@ -38,7 +38,7 @@ describe( "an assessor object", function() {
             assessor.getValidResults = function() {
                 return [ result5, result4, result8 ];
             };
-            expect( assessor.calculateOverallScore() ).toBe( 63 );
+            expect( assessor.calculateOverallScore() ).toBe( 17 );
         } );
     } );
 

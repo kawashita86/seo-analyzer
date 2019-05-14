@@ -187,6 +187,6 @@ describe( "running assessments in the assessor", function() {
             "imageKeyword"
         ] );
 
-        expect(overallScore).toEqual(95);
+        expect(overallScore).toEqual(100);
     } );
 } );

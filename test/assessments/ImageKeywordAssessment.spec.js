@@ -16,7 +16,7 @@ describe( "an assessment to check if the keyword is in the image", function() {
             Factory.buildMockResearcher(1),
             i18n );
 
-        expect( assessment.getScore() ).toBe( 5 );
+        expect( assessment.getScore() ).toBe( 10 );
         expect( assessment.getText() ).toBe(
           "Keyword is present in image."
         );
