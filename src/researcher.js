@@ -8,11 +8,11 @@ import { isUndefined } from "lodash-es";
 import { isEmpty } from "lodash-es";
 
 // Researches
-import wordCountInText from "yoastseo/src/researches/wordCountInText.js";
+//import wordCountInText from "yoastseo/src/researches/wordCountInText.js";
 
-import getLinkStatistics from "yoastseo/src/researches/getLinkStatistics.js";
-import linkCount from "yoastseo/src/researches/countLinks.js";
-import getLinks from "yoastseo/src/researches/getLinks.js";
+//import getLinkStatistics from "yoastseo/src/researches/getLinkStatistics.js";
+//import linkCount from "yoastseo/src/researches/countLinks.js";
+//import getLinks from "yoastseo/src/researches/getLinks.js";
 //import urlLength from "yoastseo/src/researches/urlIsTooLong.js";
 import findKeywordInPageTitle from "yoastseo/src/researches/findKeywordInPageTitle.js";
 // At least 1 with keyword
@@ -25,9 +25,9 @@ import keywordCount from "yoastseo/src/researches/keywordCount";
 import metaDescriptionLength from "yoastseo/src/researches/metaDescriptionLength.js";
 //import imageCount from "yoastseo/src/researches/imageCountInText.js";
 //import altTagCount from "yoastseo/src/researches/imageAltTags.js";
-import keyphraseLength from "yoastseo/src/researches/keyphraseLength";
+//import keyphraseLength from "yoastseo/src/researches/keyphraseLength";
 import metaDescriptionKeyword from "yoastseo/src/researches/metaDescriptionKeyword.js";
-import keywordCountInUrl from "yoastseo/src/researches/keywordCountInUrl";
+//import keywordCountInUrl from "yoastseo/src/researches/keywordCountInUrl";
 import findKeywordInFirstParagraph from "yoastseo/src/researches/findKeywordInFirstParagraph.js";
 import pageTitleWidth from "yoastseo/src/researches/pageTitleWidth.js";
 //import wordComplexity from "yoastseo/src/researches/getWordComplexity.js";
@@ -63,12 +63,12 @@ var Researcher = function( paper ) {
 
   this.defaultResearches = {
     //urlLength: urlLength,
-    wordCountInText: wordCountInText,
+    //wordCountInText: wordCountInText,
     findKeywordInPageTitle: findKeywordInPageTitle,
     //calculateFleschReading: calculateFleschReading,
     //getLinkStatistics: getLinkStatistics,
-    getLinks: getLinks,
-    linkCount: linkCount,
+    //getLinks: getLinks,
+    //linkCount: linkCount,
     //imageCount: imageCount,
     //altTagCount: altTagCount,
     matchKeywordInSubheadings: matchKeywordInSubheadings,
@@ -77,8 +77,8 @@ var Researcher = function( paper ) {
     //stopWordsInKeyword: stopWordsInKeyword,
     //stopWordsInUrl: stopWordsInUrl,
     metaDescriptionLength: metaDescriptionLength,
-    keyphraseLength: keyphraseLength,
-    keywordCountInUrl: keywordCountInUrl,
+    //keyphraseLength: keyphraseLength,
+    //keywordCountInUrl: keywordCountInUrl,
     firstParagraph: findKeywordInFirstParagraph,
     metaDescriptionKeyword: metaDescriptionKeyword,
     pageTitleWidth: pageTitleWidth,

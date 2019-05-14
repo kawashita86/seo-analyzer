@@ -29,11 +29,11 @@ export default class Assessor {
   }
 
   isApplicable(assessment, paper, researcher) {
-    if (assessment.hasOwnProperty("isApplicable") || typeof Assessor.isApplicable === "function") {
+    if (assessment.hasOwnProperty("isApplicable") || typeof this.isApplicable === "function") {
       return assessment.isApplicable(paper, researcher);
     }
 
-    return true;
+    return false;
   }
 
   getPaper() {
@@ -93,8 +93,7 @@ export default class Assessor {
     let totalScore = 0;
 
     results.forEach(assessmentResult => totalScore += assessmentResult.getScore());
-
-    return Math.round(totalScore / (results.length * ScoreRating) * 100) || 0;
+    return totalScore; //Math.round(totalScore / (results.length * ScoreRating) * 100) || 0;
   }
 
   addAssessment(name, assessment) {

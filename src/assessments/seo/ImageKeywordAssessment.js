@@ -9,7 +9,7 @@ export default class ImageKeywordAssessment extends Assessment {
 
     const defaultConfig = {
       scores: {
-        good: 5,
+        good: 10,
         bad: 0,
       }
     };

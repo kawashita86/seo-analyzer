@@ -24,11 +24,11 @@ export default class CharLengthAssessment extends Assessment {
             veryFarBelowMinimum: 100,
 
             scores: {
-                recommendedMinimum: 9,
-                slightlyBelowMinimum: 6,
-                belowMinimum: 3,
-                farBelowMinimum: -10,
-                veryFarBelowMinimum: -20,
+                recommendedMinimum: 10,
+                slightlyBelowMinimum: 0,
+                belowMinimum: 0,
+                farBelowMinimum: 0,
+                veryFarBelowMinimum: 0,
             },
 
             cornerstoneContent: false,

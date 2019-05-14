@@ -14,6 +14,11 @@ const config = {
         path: path.resolve(__dirname, './dist'),
         filename: 'bundle.js'
     },
+    /*resolve: {
+        alias: {
+            'lodash-es': 'lodash'
+        }
+    },*/
     // Loaders
     module: {
         rules : [

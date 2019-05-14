@@ -32,7 +32,7 @@ class TitleKeywordPositionAssessment extends Assessment {
             },
         };
 
-        this.identifier = "titleKeyword";
+        this.identifier = "titleKeywordPosition";
         this._config = merge( defaultConfig, config );
     }
 
