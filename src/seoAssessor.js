@@ -1,6 +1,6 @@
 import IntroductionKeywordAssessment from "yoastseo/src/assessments/seo/IntroductionKeywordAssessment";
 //import KeyphraseLengthAssessment from "yoastseo/src/assessments/seo/KeyphraseLengthAssessment";
-import KeywordDensityAssessment from "yoastseo/src/assessments/seo/KeywordDensityAssessment";
+import KeywordDensityAssessment from "./assessments/seo/KeywordDensityAssessment";
 import MetaDescriptionKeywordAssessment from "../src/assessments/seo/MetaDescriptionKeywordAssessment";
 //import TextCompetingLinksAssessment from "yoastseo/src/assessments/seo/TextCompetingLinksAssessment";
 //import InternalLinksAssessment from "yoastseo/src/assessments/seo/InternalLinksAssessment";
