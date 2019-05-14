@@ -1,5 +1,5 @@
 import linksWithKeywordsCount from "../../src/researches/linksWithKeywordsCount";
-import Paper from "yoastseo/src/values/Paper";
+import Paper from "../../src/values/Paper.js";
 import Factory from "../testHelpers/factory";
 
 describe("Matching keyphrase in subheadings", () => {

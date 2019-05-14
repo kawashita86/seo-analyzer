@@ -1,5 +1,5 @@
 import Assessor from "../src/seoAssessor.js";
-import Paper from "yoastseo/src/values/Paper.js";
+import Paper from "../src/values/Paper.js";
 import factory from "./testHelpers/factory.js";
 import getResults from "./testHelpers/getAssessorResults";
 const i18n = factory.buildJed();

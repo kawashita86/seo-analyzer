@@ -1,7 +1,7 @@
 /* global describe it expect */
 import KeywordDensityAssessment from "../../src/assessments/seo/KeywordDensityAssessment";
 import Researcher from "../../src/researcher";
-import Paper from "yoastseo/src/values/Paper.js";
+import Paper from "../../src/values/Paper.js";
 import Mark from "yoastseo/src/values/Mark.js";
 import factory from "../testHelpers/factory.js";
 

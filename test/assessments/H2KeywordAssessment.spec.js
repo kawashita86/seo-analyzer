@@ -1,5 +1,5 @@
 import H2KeywordAssessment from "../../src/assessments/seo/H2KeywordAssessment";
-import Paper from "yoastseo/src/values/Paper";
+import Paper from "../../src/values/Paper.js";
 import Factory from "../testHelpers/factory";
 import Researcher from "../../src/researcher";
 

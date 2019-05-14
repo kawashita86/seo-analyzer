@@ -1,5 +1,5 @@
 import Researcher from "../src/researcher.js";
-import Paper from "yoastseo/src/values/Paper.js";
+import Paper from "../src/values/Paper.js";
 import InvalidTypeError from "yoastseo/src/errors/invalidType.js";
 import MissingArgument from "yoastseo/src/errors/missingArgument";
 

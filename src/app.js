@@ -23,7 +23,7 @@ import ContentAssessor from "./contentAssessor.js";
 //import Researcher from "yoastseo/src/researcher.js";
 import AssessorPresenter from "yoastseo/src/renderers/AssessorPresenter.js";
 import Pluggable from "yoastseo/src/pluggable.js";
-import Paper from "yoastseo/src/values/Paper.js";
+import Paper from "./values/Paper.js";
 import {measureTextWidth} from "yoastseo/src/helpers/createMeasurementElement.js";
 import {sprintf} from "./helpers/sprintf";
 
@@ -130,6 +130,7 @@ var defaults = {
  * @param   {*}         snippetPreview  The 'object' to check against.
  * @returns {boolean}                   Whether or not it's a valid SnippetPreview object.
  */
+
 /*function isValidSnippetPreview(snippetPreview) {
   return !isUndefined(snippetPreview) && SnippetPreview.prototype.isPrototypeOf(snippetPreview);
 }*/

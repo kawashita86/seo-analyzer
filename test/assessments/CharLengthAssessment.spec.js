@@ -1,5 +1,5 @@
 import CharLengthAssessment from "../../src/assessments/seo/CharLengthAssessment.js";
-import Paper from "yoastseo/src/values/Paper.js";
+import Paper from "../../src/values/Paper.js";
 import Factory from "../testHelpers/factory.js";
 var i18n = Factory.buildJed();
 

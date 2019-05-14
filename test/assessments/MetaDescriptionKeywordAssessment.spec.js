@@ -1,5 +1,5 @@
 import MetaDescriptionKeywordAssessment from "../../src/assessments/seo/MetaDescriptionKeywordAssessment";
-import Paper from "yoastseo/src/values/Paper";
+import Paper from "../../src/values/Paper.js";
 import Factory from "../testHelpers/factory";
 
 const i18n = Factory.buildJed();
