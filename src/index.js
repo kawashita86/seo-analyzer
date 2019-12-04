@@ -1,4 +1,5 @@
 //import SnippetPreview from "./snippetPreview";
+import "./index.css"
 import App from "./app";
 
 /**

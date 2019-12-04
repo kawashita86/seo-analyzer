@@ -15,24 +15,29 @@
                     <div id="inputForm" class="inputForm">
                         <input type="hidden" id="locale" name="locale" placeholder="it_IT"/>
 
-
+                        <div class="formGroup">
                         <label for="focusKeyword">Title</label>
                         <input type="text" id="title" name="title" placeholder="Write your title!"/>
-
-
+                        </div>
+                        <div class="formGroup">
                         <label for="focusKeyword">Subtitle</label>
                         <input type="text" id="subtitle" name="subtitle" placeholder="Write your subtitle!"/>
-
-                        <label for="content">Text</label>
-                        <textarea id="content" name="content" placeholder="Start writing your text!"></textarea>
-
+                        </div>
+                        <div class="formGroup">
+                            <label for="content" style="vertical-align: top;">Text</label>
+                        <textarea id="content" name="content" placeholder="Start writing your text!" cols="29" rows="10"></textarea>
+                        </div>
+                        <div class="formGroup">
                         <label for="focusKeyword">Focus keyword</label>
                         <input type="text" id="focusKeyword" name="focusKeyword" placeholder="Choose a focus keyword"/>
-
+                        </div>
+                        <div class="formGroup">
                         <label for="synonyms">Synonyms</label>
                         <input type="text" id="synonyms" name="synonyms" placeholder="Choose synonyms"/>
-
+                        </div>
+                        <div class="formGroup">
                         <button type="button" id="refresh-analysis">Refresh!</button>
+                        </div>
                     </div>
                     <form id="snippetForm" class="snippetForm">
                         <label>Snippet Preview</label>
