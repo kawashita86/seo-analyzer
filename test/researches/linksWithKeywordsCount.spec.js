@@ -1,4 +1,4 @@
-import linksWithKeywordsCount from "../../src/researches/linksWithKeywordsCount";
+import linksWithKeywordsCount from "../../src/researches/longLinksWithKeywordsCount";
 import Paper from "../../src/values/Paper.js";
 import Factory from "../testHelpers/factory";
 

@@ -24,7 +24,7 @@ class TitleKeywordAssessment extends Assessment {
 
         const defaultConfig = {
             scores: {
-                good: 30,
+                good: 20,
                 bad: 0,
             }
         };

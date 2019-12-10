@@ -6,7 +6,7 @@ export default (paper) => {
 
   const links = getAnchors(text);
   return links.reduce((acc, link) => {
-    if (link.includes(keyword)) {
+    if (link.includes(keyword) && link.length >= 4) {
       return acc + 1
     }
     return acc

@@ -50,7 +50,8 @@ import h1s from "yoastseo/src/researches/h1s";
 import charCountIntText from "./researches/charCountIntText";
 import subheadingsH2Count from "./researches/subheadingsH2Count";
 import subheadingsH2WithKeywordCount from "./researches/subheadingsH2WithKeywordCount";
-import linksWithKeywordsCount from "./researches/linksWithKeywordsCount";
+import longLinksWithKeywordsCount from "./researches/longLinksWithKeywordsCount";
+import keywordInFirsts300Chars from './researches/keywordInFirsts300Chars';
 
 /**
  * This contains all possible, default researches.
@@ -102,7 +103,8 @@ var Researcher = function( paper ) {
     charCount: charCountIntText,
     subheadingsH2Count,
     subheadingsH2WithKeywordCount,
-    linksWithKeywordsCount,
+    longLinksWithKeywordsCount,
+    keywordInFirsts300Chars,
   };
 
   this._data = {};

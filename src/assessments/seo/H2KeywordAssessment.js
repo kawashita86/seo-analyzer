@@ -24,7 +24,7 @@ export default class H2KeywordAssessment extends Assessment {
       },
       scores: {
         noMatches: 0,
-        matches: 10,
+        matches: 15,
       },
     };
 

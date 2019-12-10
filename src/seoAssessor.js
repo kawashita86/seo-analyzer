@@ -19,7 +19,8 @@ import CharLengthAssessment from "./assessments/seo/CharLengthAssessment";
 import TitleKeywordPositionAssessment from "./assessments/seo/TitleKeywordPositionAssessment";
 import H2KeywordAssessment from "./assessments/seo/H2KeywordAssessment";
 import LinkWithKeywordAssessment from "./assessments/seo/LinkWithKeywordAssessment";
-import ImageKeywordAssessment from "./assessments/seo/ImageKeywordAssessment";
+import ImageAltKeywordAssessment from "./assessments/seo/ImageAltKeywordAssessment";
+import ImageNameKeywordAssessment from './assessments/seo/ImageNameKeywordAssessment';
 
 /**
  * Creates the Assessor
@@ -57,7 +58,8 @@ export default class SEOAssessor extends Assessor {
       new CharLengthAssessment(),
       new H2KeywordAssessment(),
       new LinkWithKeywordAssessment(),
-      new ImageKeywordAssessment()
+      new ImageAltKeywordAssessment(),
+      new ImageNameKeywordAssessment(),
     ];
   }
 }

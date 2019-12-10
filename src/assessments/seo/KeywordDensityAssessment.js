@@ -54,7 +54,7 @@ class KeywordDensityAssessment extends Assessment {
             },
             scores: {
                 overMaximum: 0,
-                correctDensity: 10,
+                correctDensity: 2.5,
                 underMinimum: 0,
             }
         };

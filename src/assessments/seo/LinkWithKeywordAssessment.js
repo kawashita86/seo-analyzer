@@ -10,7 +10,7 @@ export default class LinkWithKeywordAssessment extends Assessment {
 
     const defaultConfig = {
       parameters: {
-        minCount: 1,
+        minCount: 3,
       },
       scores: {
         noMatches: 0,
@@ -23,7 +23,7 @@ export default class LinkWithKeywordAssessment extends Assessment {
   }
 
   getResult(paper, researcher, i18n) {
-    this._linksWithKeywords = researcher.getResearch("linksWithKeywordsCount");
+    this._linksWithKeywords = researcher.getResearch("longLinksWithKeywordsCount");
 
     const assessmentResult = new AssessmentResult();
 

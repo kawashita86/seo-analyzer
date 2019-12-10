@@ -85,7 +85,7 @@ class TitleKeywordPositionAssessment extends Assessment {
         const exactMatchKeyphrase = this._keywordMatches.exactMatchKeyphrase;
 
         if ( exactMatchFound === true ) {
-            if ( position === 0 ) {
+            if ( position <= 3 ) {
                 return {
                     score: this._config.scores.good,
                     resultText:

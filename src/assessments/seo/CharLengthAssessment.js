@@ -24,7 +24,7 @@ export default class CharLengthAssessment extends Assessment {
             veryFarBelowMinimum: 100,
 
             scores: {
-                recommendedMinimum: 10,
+                recommendedMinimum: 12.5,
                 slightlyBelowMinimum: 0,
                 belowMinimum: 0,
                 farBelowMinimum: 0,

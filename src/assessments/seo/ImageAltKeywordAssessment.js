@@ -3,13 +3,13 @@ import {escape, merge} from "lodash-es";
 import Assessment from "../../assesment";
 import AssessmentResult from "yoastseo/src/values/AssessmentResult";
 
-export default class ImageKeywordAssessment extends Assessment {
+export default class ImageAltKeywordAssessment extends Assessment {
   constructor(config = {}) {
     super();
 
     const defaultConfig = {
       scores: {
-        good: 10,
+        good: 5,
         bad: 0,
       }
     };

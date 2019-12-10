@@ -1,4 +1,4 @@
-import ImageKeywordAssessment from "../../src/assessments/seo/ImageKeywordAssessment";
+import ImageAltKeywordAssessment from "../../src/assessments/seo/ImageAltKeywordAssessment";
 import Paper from "../../src/values/Paper.js";
 import Factory from "../testHelpers/factory";
 
@@ -11,7 +11,7 @@ describe( "an assessment to check if the keyword is in the image", function() {
             keyword: "keyword",
             alt: "keyword and the rest of this non-empty alt",
         } );
-        const assessment = new ImageKeywordAssessment().getResult(
+        const assessment = new ImageAltKeywordAssessment().getResult(
             paper,
             Factory.buildMockResearcher(1),
             i18n );
@@ -27,7 +27,7 @@ describe( "an assessment to check if the keyword is in the image", function() {
             keyword: "keyword",
             alt: "a non-empty alt",
         } );
-        const assessment = new ImageKeywordAssessment().getResult(
+        const assessment = new ImageAltKeywordAssessment().getResult(
             paper,
             Factory.buildMockResearcher(0),
             i18n );
@@ -43,7 +43,7 @@ describe( "an assessment to check if the keyword is in the image", function() {
             keyword: "keyword",
             alt: "a non-empty alt",
         } );
-        const assessment = new ImageKeywordAssessment().getResult(
+        const assessment = new ImageAltKeywordAssessment().getResult(
             paper,
             Factory.buildMockResearcher(0),
             i18n );
@@ -59,7 +59,7 @@ describe( "an assessment to check if the keyword is in the image", function() {
             keyword: "\"cats and dogs\"",
             alt: "dogs and cats",
         } );
-        const assessment = new ImageKeywordAssessment().getResult(
+        const assessment = new ImageAltKeywordAssessment().getResult(
             paper,
             Factory.buildMockResearcher(0),
             i18n );
@@ -72,12 +72,12 @@ describe( "an assessment to check if the keyword is in the image", function() {
 
 
     it( "returns false isApplicable for a paper without alt", function() {
-        const isApplicableResult = new ImageKeywordAssessment().isApplicable( new Paper( "", { keyword: "some keyword", alt: "" } ) );
+        const isApplicableResult = new ImageAltKeywordAssessment().isApplicable( new Paper( "", { keyword: "some keyword", alt: "" } ) );
         expect( isApplicableResult ).toBe( false );
     } );
 
     it( "returns false isApplicable for a paper without keyword", function() {
-        const isApplicableResult = new ImageKeywordAssessment().isApplicable( new Paper( "", { keyword: "", alt: "some alt" } ) );
+        const isApplicableResult = new ImageAltKeywordAssessment().isApplicable( new Paper( "", { keyword: "", alt: "some alt" } ) );
         expect( isApplicableResult ).toBe( false );
     } );
 } );

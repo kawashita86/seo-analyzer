@@ -21,7 +21,7 @@ class IntroductionKeywordAssessment extends Assessment {
   getResult( paper, researcher, i18n ) {
     const assessmentResult = new AssessmentResult();
 
-    this._firstParagraphMatches = researcher.getResearch( "firstParagraph" );
+    this._matchInFirsts300 = researcher.getResearch( "keywordInFirsts300Chars" );
     const calculatedResult = this.calculateResult( i18n );
 
     assessmentResult.setScore( calculatedResult.score );
@@ -35,16 +35,16 @@ class IntroductionKeywordAssessment extends Assessment {
   }
 
   calculateResult( i18n ) {
-    if ( this._firstParagraphMatches.foundInParagraph ) {
+    if ( this._matchInFirsts300 ) {
       return {
         score: this._config.scores.good,
-        resultText: "Keyword is present in first paragraph.",
+        resultText: "Keyword is present in firsts 300 characters.",
       };
     }
 
     return {
       score: this._config.scores.bad,
-      resultText: "Keyword is NOT present in first paragraph.",
+      resultText: "Keyword is NOT present in firsts 300 characters.",
     };
   }
 }
