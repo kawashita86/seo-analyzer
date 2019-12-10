@@ -853,7 +853,7 @@ button.yoast-tooltip {
 }
 
 .content-sidebar-wrap {
-    width:50%;
+    width:100%;
     float:left;
 }
 
@@ -875,4 +875,8 @@ button.yoast-tooltip {
 .formGroup {
     width:100%;
     clear:both;
+}
+
+.overallScore-container {
+    display:none;
 }

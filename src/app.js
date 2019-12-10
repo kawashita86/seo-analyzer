@@ -45,7 +45,9 @@ var defaults = {
     },
     updateSnippetValues: function () {
     },
-    saveScores: function () {
+    saveScores: function (data) {
+      console.log(data);
+      document.getElementById('scoreSum').innerText = data;
     },
     saveContentScore: function () {
     },
